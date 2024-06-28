@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import '../index.css';
+import logo from '../../public/logo.png'
 
 // import home from '../../public/home.svg';
 
@@ -41,25 +43,29 @@ function Navbar() {
         <a> Home </a>
       </li>
       <li className=" rounded-md hover:bg-slate-100 duration-300 cursor-pointer dark:hover:bg-slate-800 ">
-        <a> About Us! </a>
+        <a> Features </a>
       </li>
 
       <li className=" rounded-md hover:bg-slate-100 duration-300 cursor-pointer dark:hover:bg-slate-800">
-        <a> Profile </a>
+        <a> Pricing </a>
       </li>
 
       <li className="rounded-md hover:bg-slate-100 duration-300 cursor-pointer dark:hover:bg-slate-800">
-        <a> Join us </a>
+        <a> About Us </a>
       </li>
 
       <li className="rounded-md hover:bg-slate-100 duration-300 cursor-pointer dark:hover:bg-slate-800">
-        <a> Tasks </a>
+        <a> Contact </a>
       </li>
     </>
   );
   return (
     <>
-   <div className="navbar bg-slate-900 text-[#FFFFFF]">
+   <div className={`navbar nav  text-[#FFFFFF] fixed top-0 left-0 right-0 z-50 ${
+         sticky
+        ? "sticky-navbar shadow-md  dark:bg-slate-700 dark:text-white duration-300 transition-all ease-in-out bg-cyan-100"
+            : ""
+        }`}>
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -81,8 +87,11 @@ function Navbar() {
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
         {navItem}
       </ul>
+      <div className="flex flex-shrink-0 items-center ms-8 me-4">
+          <img className="h-12 w-auto" src={logo} alt="Your Company" />
+        </div>
     </div>
-    <a className=" text-2xl font-bold cursor-pointer text-[#FFE344]">ChainCred</a>
+    <a className=" text-2xl font-bold cursor-pointer text-[#FFE344]">CredChain</a>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -105,59 +114,3 @@ export default Navbar;
 
 
 
-// {/* <div
-//         className={` max-w-screen-2xl container mx-auto md:px-20 px-4  dark:bg-slate-900 dark:text-white fixed top-0 left-0 right-0 z-50 ${
-//           sticky
-//             ? "sticky-navbar shadow-md  dark:bg-slate-700 dark:text-white duration-300 transition-all ease-in-out bg-cyan-100"
-//             : ""
-//         }`}
-//       >
-//         {/* <h1> {user.username}</h1> */}
-//         <div className="navbar ">
-//           <div className="navbar-start">
-//             <div className="dropdown">
-//               <div
-//                 tabIndex={0}
-//                 role="button"
-//                 className="btn btn-ghost lg:hidden"
-//               >
-//                 <svg
-//                   xmlns="http://www.w3.org/2000/svg"
-//                   className="h-5 w-5"
-//                   fill="none"
-//                   viewBox="0 0 24 24"
-//                   stroke="currentColor"
-//                 >
-//                   <path
-//                     strokeLinecap="round"
-//                     strokeLinejoin="round"
-//                     strokeWidth="2"
-//                     d="M4 6h16M4 12h8m-8 6h16"
-//                   />
-//                 </svg>
-//               </div>
-//               <ul
-//                 tabIndex={0}
-//                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-//               >
-//                 {navItem}
-//               </ul>
-//             </div>
-            
-//             <a className=" text-2xl font-bold cursor-pointer text-[#FFE344]">ChainCred</a>
-//           </div>
-//           <div className="navbar-end space-x-3">
-//             <div className="navbar-center hidden lg:flex">
-//               <ul className="menu menu-horizontal px-1 ">{navItem}</ul>
-//             </div>
-
-            
-            
-//             <div className="navbar-end">
-//               <a className="bg-[#FFE344] text-black px-3 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer dark:bg-[#FFE344] ">
-//                 Login
-//               </a>
-//             </div>
-//           </div>
-//         </div>
-//       </div> */}
