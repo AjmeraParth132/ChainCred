@@ -63,7 +63,7 @@ class CompanyFinance(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
-class CompanyDocuments(models.Model):
+class CompanyExpense(models.Model):
     """
     Represents the documents associated with a company.
 
@@ -85,6 +85,8 @@ class CompanyDocuments(models.Model):
         choices=[('bank_statement', 'Bank Statement'), ('pitch_deck', 'Pitch Deck'), ('financial_report', 'Financial Report'),('other', 'Other')],
         default='bank_statement'
     )
+    amount = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True)
+    remarks = models.TextField(null=True, blank=True)
     document_file = models.FileField(upload_to='company_documents/', null=True, blank=True)
     is_shared_with_investors = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
