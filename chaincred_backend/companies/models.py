@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Company(models.Model):
     """
@@ -18,22 +19,23 @@ class Company(models.Model):
         created_at (DateTimeField): The date and time when the company was created.
         updated_at (DateTimeField): The date and time when the company was last updated.
     """
-    company_id = models.AutoField(primary_key=True)
-    company_name = models.CharField(max_length=100)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    company_id = models.AutoField(primary_key=True, unique=True)
+    company_name = models.CharField(max_length=100, null=True, blank=True)
     company_logo = models.ImageField(upload_to='company_logos/', blank=True, null=True)
     company_website = models.URLField(max_length=200, blank=True, null=True)
-    founding_date = models.DateField()
+    founding_date = models.DateField(blank=True, null=True)
     company_address = models.CharField(max_length=100, null=True, blank=True)
     number_of_employees = models.IntegerField(null=True, blank=True)
     industry = models.CharField(max_length=100, null=True, blank=True)
-    current_valuation = models.DecimalField(max_digits=20, decimal_places=2)
+    current_valuation = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True)
     previous_valuation = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True)
     funding_stage = models.CharField(
         max_length=20,
         choices=[('pre-seed', 'Pre-Seed'), ('seed', 'Seed'), ('series a', 'Series A'), ('series b', 'Series B'), ('series c', 'Series C')],
         default='pre-seed'
     )
-    runway_status = models.CharField(max_length=100)
+    runway_status = models.CharField(max_length=100,blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
