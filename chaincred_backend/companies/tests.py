@@ -1,7 +1,7 @@
 from rest_framework.test import APITestCase
 from rest_framework import status
 from django.contrib.auth.models import User
-from .models import Company
+from .models import Company,CompanyExpense
 
 class SignupViewTestCase(APITestCase):
     def setUp(self):
@@ -49,3 +49,25 @@ class LogoutViewTestCase(APITestCase):
     def test_logout_success(self):
         response = self.client.post(self.logout_url)
         self.assertEqual(response.status_code, 200)
+        
+
+class CompanyExpenseCreateTest(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser',password='testpassword')
+        self.company = Company.objects.create(user=self.user, company_name='Test Company')
+        self.client.login(username='testuser',password='testpassword')
+        
+    def test_create_expense(self):
+        url = '/companies/company_expenses/'
+        data = {
+            'company_id':self.company.pk,
+            'document_name':'Test Document',
+            'document_type':'bank_statement',
+            'amount':1000.00,
+            'remarks':'Test Expense',
+            'document_file':None,
+            'is_shared_with_investors':True
+        }
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(CompanyExpense.objects.get().document_name, 'Test Document')

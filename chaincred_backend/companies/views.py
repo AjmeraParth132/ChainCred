@@ -2,10 +2,11 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status,viewsets
+from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import authenticate,logout
-from .models import Company
-from .serializers import CompanySerializer
+from .models import Company,CompanyExpense
+from .serializers import CompanySerializer,CompanyExpenseSerializer
 
 class SignupView(APIView):
     """
@@ -85,3 +86,33 @@ class LogoutView(APIView):
         """
         logout(request)
         return Response({'message': 'Logged out successfully'}, status=status.HTTP_200_OK)
+    
+
+class CompanyExpenseViewSet(viewsets.ModelViewSet):
+    """
+    A view for managing company expenses.
+
+    Methods:
+        post: Creates a new company expense.
+    """
+    queryset = CompanyExpense.objects.all()
+    serializer_class = CompanyExpenseSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def create(self,request,*args, **kwargs):
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
+        company_id = request.data.get('company_id')
+        try:
+            company = Company.objects.get(company_id=company_id)
+        except Company.DoesNotExist:
+            return Response({'error': 'Company not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+        
+        serializer = self.get_serializer(data=request.data)
+        # print(request.data)
+        if serializer.is_valid():
+            serializer.save(company_id=company)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
