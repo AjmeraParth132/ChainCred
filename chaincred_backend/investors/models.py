@@ -1,23 +1,20 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 from companies.models import Company
+
 class Investor(models.Model):
     """
     Represents an investor in the system.
 
     Attributes:
-        investor_id (AutoField): The unique identifier for the investor.
-        investor_name (CharField): The name of the investor.
-        investor_email (EmailField): The email address of the investor.
-        investor_company (CharField): The company associated with the investor (optional).
-        investment_focus (CharField): The focus of the investor's investments (optional).
-        created_at (DateTimeField): The date and time when the investor was created.
-        updated_at (DateTimeField): The date and time when the investor was last updated.
+        user (User): The user associated with the investor.
+        investor_company (str): The company the investor is affiliated with.
+        investment_focus (str): The focus area of the investor's investments.
+        created_at (datetime): The date and time when the investor was created.
+        updated_at (datetime): The date and time when the investor was last updated.
     """
-    
-    investor_id = models.AutoField(primary_key=True)
-    investor_name = models.CharField(max_length=100)
-    investor_email = models.EmailField(max_length=100, unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    investor_id = models.AutoField(unique=True, primary_key=True)
     investor_company = models.CharField(max_length=100, null=True, blank=True)
     investment_focus = models.CharField(max_length=100, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
