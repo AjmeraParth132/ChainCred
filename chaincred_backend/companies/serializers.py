@@ -10,4 +10,4 @@ class CompanySerializer(serializers.ModelSerializer):
 class CompanyExpenseSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompanyExpense
-        fields = ['id', 'company_id', 'document_name', 'document_type', 'amount', 'remarks', 'document_file', 'is_shared_with_investors', 'created_at', 'updated_at']
+        fields = ['id', 'company_id',  'amount', 'remarks', 'document','expense_bucket', 'created_at', 'updated_at']

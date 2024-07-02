@@ -61,13 +61,11 @@ class CompanyExpenseCreateTest(APITestCase):
         url = '/companies/company_expenses/'
         data = {
             'company_id':self.company.pk,
-            'document_name':'Test Document',
-            'document_type':'bank_statement',
             'amount':1000.00,
             'remarks':'Test Expense',
-            'document_file':None,
-            'is_shared_with_investors':True
+            'document':None,
+            'expense_bucket':'Marketing',
         }
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(CompanyExpense.objects.get().document_name, 'Test Document')
+        self.assertEqual(CompanyExpense.objects.get().expense_bucket, 'Marketing')

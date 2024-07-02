@@ -80,14 +80,9 @@ class CompanyExpense(models.Model):
 
     id = models.AutoField(primary_key=True)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
-    document_name = models.CharField(max_length=100)
-    document_type = models.CharField(max_length=20,
-        choices=[('bank_statement', 'Bank Statement'), ('pitch_deck', 'Pitch Deck'), ('financial_report', 'Financial Report'),('other', 'Other')],
-        default='bank_statement'
-    )
+    expense_bucket = models.CharField(max_length=100, null=True, blank=True)
     amount = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True)
     remarks = models.TextField(null=True, blank=True)
-    document_file = models.FileField(upload_to='company_documents/', null=True, blank=True)
-    is_shared_with_investors = models.BooleanField(default=True)
+    document = models.FileField(upload_to='company_documents/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
