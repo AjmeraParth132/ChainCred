@@ -117,7 +117,7 @@
     flex-shrink: 0;
     border-radius: 4px;
     background: #43456b;
-    color: #fff;
+    /* color: #fff; */
     font-family: Montserrat, sans-serif;
     font-size: 20px;
     font-style: normal;
@@ -151,7 +151,7 @@
   }
   
   .password-toggle svg {
-    fill: #000; 
+    fill: #fffdfd; 
   }
   
   

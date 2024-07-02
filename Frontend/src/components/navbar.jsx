@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import '../index.css';
+// import { useAuth } from "../context/autProvider";
 import logo from '../../public/logo.png'
+// import Logout from "./logout";
 
 // import home from '../../public/home.svg';
 
 function Navbar() {
+
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
@@ -40,7 +43,7 @@ function Navbar() {
   const navItem = (
     <>
       <li className="rounded-md hover:bg-slate-100 duration-300 cursor-pointer dark:hover:bg-slate-800">
-        <a> Home </a>
+        <a href="/"> Home </a>
       </li>
       <li className=" rounded-md hover:bg-slate-100 duration-300 cursor-pointer dark:hover:bg-slate-800 ">
         <a> Features </a>
@@ -99,10 +102,12 @@ function Navbar() {
     </ul>
   </div>
   <div className="navbar-end mx-5">
-  <a className="bg-[#FFE344] text-black px-3 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer dark:bg-[#FFE344] ">
+  
+  <a href="/signup" className="bg-[#FFE344] text-black px-3 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer dark:bg-[#FFE344] ">
                 Get Started
               </a>
   </div>
+
 </div>
     </>
   );
