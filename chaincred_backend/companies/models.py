@@ -20,6 +20,7 @@ class Company(models.Model):
         updated_at (DateTimeField): The date and time when the company was last updated.
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    mobile_number = models.CharField(max_length=10, null=True, blank=True)
     company_id = models.AutoField(primary_key=True, unique=True)
     company_name = models.CharField(max_length=100, null=True, blank=True)
     company_logo = models.ImageField(upload_to='company_logos/', blank=True, null=True)

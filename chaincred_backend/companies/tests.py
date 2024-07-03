@@ -14,6 +14,7 @@ class SignupViewTestCase(APITestCase):
             },
             'company':{
                 'company_name':'Test Company',
+                'mobile_number':'1234567890',
             }
         }
     def test_signup_success(self):
