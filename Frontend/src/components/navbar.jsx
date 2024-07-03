@@ -94,7 +94,7 @@ function Navbar() {
           <img className="h-12 w-auto" src={logo} alt="Your Company" />
         </div>
     </div>
-    <a className=" text-2xl font-bold cursor-pointer text-[#FFE344]">CredChain</a>
+    <a className=" text-2xl font-bold cursor-pointer text-[#FFE344]">ChainCred</a>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
