@@ -13,6 +13,7 @@ class SignupViewTestCase(APITestCase):
                 'password':'testpassword'
             },
             'company':{
+                'mobile_number':'1234567890',
                 'company_name':'Test Company',
             }
         }

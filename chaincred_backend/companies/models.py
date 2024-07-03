@@ -21,6 +21,7 @@ class Company(models.Model):
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     company_id = models.AutoField(primary_key=True, unique=True)
+    mobile_number = models.CharField(max_length=10)
     company_name = models.CharField(max_length=100, null=True, blank=True)
     company_logo = models.ImageField(upload_to='company_logos/', blank=True, null=True)
     company_website = models.URLField(max_length=200, blank=True, null=True)
