@@ -15,7 +15,8 @@ class SignupViewTestCase(TestCase):
             },
             'investor':{
                 'investor_company':'Test Company',
-                'investment_focus':'Test Focus'
+                'investment_focus':'Test Focus',
+                'mobile_number':'1234567890',
             }
         }
     def test_signup_success(self):
