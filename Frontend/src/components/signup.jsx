@@ -29,14 +29,27 @@ function Signup() {
       return;
     }
     try {
-        let endpoint = data.is_company ? "/companies/signup" : "/investors/signup";
-        const res = await axios.post(`http://127.0.0.1:8000${endpoint}`, {
-            username: data.username,
-            email: data.email,
-            password: data.password,
-            mobile_number: data.mobile_number,
-            company: data.is_company ? data.company : undefined,
-          });
+      let endpoint = data.is_company ? "/companies/signup/" : "/investors/signup/";
+      // let user_type = data.is_company ? "company" : "investor";
+      let payload = {
+        user: {
+          username: data.username,
+          email: data.email,
+          password: data.password,
+        }
+      };
+      if (data.is_company) {
+        payload.company = {
+          mobile_number: data.mobile_number,
+          company_name: data.company,
+        }
+      }
+      else {
+        payload.investor = {
+          mobile_number: data.mobile_number,
+        }
+      }
+        const res = await axios.post(`http://127.0.0.1:8000${endpoint}`, payload);
       toast.success("Account created successfully!");
       setTimeout(() => {
         window.location.reload();
