@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import signupImg from "../../public/signup.png"; // Replace with actual path
+import signupImg from "../../public/signup.png"; 
 import "../index.css";
-import "../../public/style/signup.css"; // Create and replace with actual path
+import "../../public/style/signup.css"; 
 import Navbar from "./navbar";
 import { Link } from "react-router-dom";
 
