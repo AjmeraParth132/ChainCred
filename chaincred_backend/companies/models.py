@@ -54,7 +54,7 @@ class Company(models.Model):
                 categoriesed_expenses[bucket] = amount
         
         total_expenses = sum(categoriesed_expenses.values())
-        percentage_distribution = {category : (amount/total_expenses)*100 for category, amount in categoriesed_expenses.items()}
+        percentage_distribution = {category : float((amount/total_expenses)*100) for category, amount in categoriesed_expenses.items()}
         
         threshold = 1
         for category, percentage in percentage_distribution.items():

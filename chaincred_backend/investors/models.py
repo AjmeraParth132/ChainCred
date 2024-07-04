@@ -19,7 +19,7 @@ class Investor(models.Model):
     investor_company = models.CharField(max_length=100, null=True, blank=True)
     investment_focus = models.CharField(max_length=100, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)  
     
 class Investments(models.Model):
     """
