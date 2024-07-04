@@ -27,7 +27,7 @@ const transactions = [
     name: "Ruskin Bond",
     date: "09 Feb 2022",
     time: "10:40AM",
-    amount: "+$46.00",
+    amount: "-$46.00",
     status: "Pending",
     statusClass: "pending",
   },
