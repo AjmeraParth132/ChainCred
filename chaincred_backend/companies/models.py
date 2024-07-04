@@ -40,6 +40,30 @@ class Company(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
+    def get_expense_distribution(self):
+        
+        expenses = CompanyExpense.objects.filter(company_id=self.company_id)
+        
+        categoriesed_expenses = {}
+        for expense in expenses:
+            bucket = expense.expense_bucket
+            amount = expense.amount
+            if bucket in categoriesed_expenses:
+                categoriesed_expenses[bucket] += amount
+            else:
+                categoriesed_expenses[bucket] = amount
+        
+        total_expenses = sum(categoriesed_expenses.values())
+        percentage_distribution = {category : (amount/total_expenses)*100 for category, amount in categoriesed_expenses.items()}
+        
+        threshold = 1
+        for category, percentage in percentage_distribution.items():
+            if percentage < threshold:
+                percentage_distribution['Others'] = percentage_distribution.get('Others', 0) + percentage
+                del percentage_distribution[category]
+        
+        return percentage_distribution
+    
 
 class CompanyFinance(models.Model):
     """
