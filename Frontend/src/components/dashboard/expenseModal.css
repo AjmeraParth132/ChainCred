@@ -1,0 +1,172 @@
+
+.add-expense-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+
+  .banner-field {
+    border-radius: 0px 4px 4px 0px black;
+    flex-shrink: 0;
+    background: #e5e2e2;
+    height: 2rem;
+  }
+
+  .glass {
+    background: rgba(71, 66, 66, 0.2); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    border-radius: 12px;
+
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 999;
+  }
+  
+  .form-control {
+    margin-bottom: 10px;
+  }
+  
+  .save-btn, .close-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .close-btn {
+    background-color: #dc3545;
+  }
+  
+
+  /* expenseModal.css */
+
+.expense-modal {
+  /* Your existing styles */
+}
+
+.modal-box {
+  /* Your existing styles */
+}
+
+.form-control {
+  margin-bottom: 1rem;
+}
+
+.form-control label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-control input,
+.form-control select,
+.form-control textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.banner-field {
+  background-color: #fff;
+}
+
+.text-red-500 {
+  color: #f56565;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #0056b3;
+}
+
+.close-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.close-btn:hover {
+  background-color: #c82333;
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.custom-checkbox label {
+  position: relative;
+  cursor: pointer;
+  padding-left: 2rem;
+}
+
+.custom-checkbox label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid #ccc;
+  border-radius: 0.25rem;
+  background: white;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + label::before {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.custom-checkbox label::after {
+  content: "";
+  position: absolute;
+  left: 0.4rem;
+  top: 0.2rem;
+  width: 0.5rem;
+  height: 0.8rem;
+  border: solid white;
+  border-width: 0 0.2rem 0.2rem 0;
+  transform: rotate(45deg);
+  opacity: 0;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + label::after {
+  opacity: 1;
+}
