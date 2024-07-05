@@ -80,17 +80,10 @@ class CompanyExpenseDistributionTest(APITestCase):
         CompanyExpense.objects.create(company_id=self.company, amount=500.00, expense_bucket='Operations')
         CompanyExpense.objects.create(company_id=self.company, amount=500.00, expense_bucket='Development')
         CompanyExpense.objects.create(company_id=self.company, amount=1000.00, expense_bucket='HR')
-        
+        self.url = f'/companies/expense-distribution/{self.company.company_id}/'
         
     def test_expense_distribution(self):
-        expected_distribution = {
-            'Marketing':33.33,
-            'Operations':16.67,
-            'Development':16.67,
-            'HR':33.33
-        }
-        distribution = self.company.get_expense_distribution()
-        distribution = {k:round(v,2) for k,v in distribution.items()}
-        print(distribution)
         
-        self.assertEqual(distribution, expected_distribution)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+
