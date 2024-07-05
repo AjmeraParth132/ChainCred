@@ -108,3 +108,17 @@ class InvestorInvestmentsView(APIView):
             })
         return Response(data, status=status.HTTP_200_OK)
     
+class InvestorExpenseDistributionView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def get(self,request):
+        user = request.user
+        investor = get_object_or_404(Investor, user=user)
+        investments = Investments.objects.filter(investor_id=investor)
+        
+        expense_distributions = {}
+        for investment in investments:
+            company = investment.company_id
+            expense_distribution = company.get_expense_distribution()
+            expense_distributions[company.company_name] = expense_distribution
+        return Response(expense_distributions, status=status.HTTP_200_OK)
