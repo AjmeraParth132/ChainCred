@@ -1,0 +1,16 @@
+/* Chart.css */
+.chart {
+  background-color: #24355c;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  color: white;
+flex-shrink: 0;
+background: #250877;
+width: 900x;
+}
+
+.chart h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}

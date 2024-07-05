@@ -14,6 +14,7 @@ class Investor(models.Model):
         updated_at (datetime): The date and time when the investor was last updated.
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    mobile_number = models.CharField(max_length=10)
     investor_id = models.AutoField(unique=True, primary_key=True)
     mobile_number = models.CharField(max_length=10, null=True, blank=True)
     investor_company = models.CharField(max_length=100, null=True, blank=True)
