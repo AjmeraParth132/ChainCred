@@ -11,10 +11,14 @@ import "./dashboard.css"; // You can use this file for styling
 const Dashboard = () => {
   return (
     <div className="dashboard-container justify-stretch">
-      <div className="dashboard-sidebar me-10 justify-start h-[]">
+      
+      <div className="dashboard-sidebar me-10 justify-start ">
         <Sidebar />
       </div>
-      <div className="dashboard-mid">
+      <div className="me-5 w-[220px]">
+        {/* <Sidebar /> */}
+      </div>
+      <div className="dashboard-content">
         <div className="main-content">
           
          

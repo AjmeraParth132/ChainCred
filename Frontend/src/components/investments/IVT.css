@@ -1,0 +1,79 @@
+/* src/components/InvestmentsTable.module.css */
+.IV-content {
+  /* padding: 20px; */
+  /* background-color: #1c2431; */
+  color: white;
+  display: flex;
+  /* margin-left: 200px; */
+}
+
+.IV {
+ 
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 1150px;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  /* margin-left: 20px; */
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #273048;
+  position: sticky;
+}
+
+tr:hover {
+  background-color: #333c50;
+  cursor: pointer;
+}
+
+.sidebar{
+  position: fixed;
+}
+
+.table-container {
+  position: relative;
+  max-height: 590px; 
+  overflow-y: auto;
+}
+
+
+
+.table-container thead th {
+  position: sticky;
+  top: 0;
+  background-color: #273048;
+  z-index: 1; /* Ensure the header is above the body rows */
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4); 
+  /* border-radius: 4px; */
+
+}
+
+.sort-container{
+  background-color: #908c9366;
+  padding: 10px 20px 10px 20px;
+  border-radius: 100px;
+}
+
+.sort{
+  /* background-color: #908c9366; */
+  background-color: transparent;
+}
+
+.sort-options{
+  background-color: transparent;
+  
+}
+
+
