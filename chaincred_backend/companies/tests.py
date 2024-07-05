@@ -15,6 +15,7 @@ class SignupViewTestCase(APITestCase):
             'company':{
                 'mobile_number':'1234567890',
                 'company_name':'Test Company',
+                'mobile_number':'1234567890',
             }
         }
     def test_signup_success(self):
@@ -62,13 +63,35 @@ class CompanyExpenseCreateTest(APITestCase):
         url = '/companies/company_expenses/'
         data = {
             'company_id':self.company.pk,
-            'document_name':'Test Document',
-            'document_type':'bank_statement',
             'amount':1000.00,
             'remarks':'Test Expense',
-            'document_file':None,
-            'is_shared_with_investors':True
+            'document':None,
+            'expense_bucket':'Marketing',
         }
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(CompanyExpense.objects.get().document_name, 'Test Document')
+        self.assertEqual(CompanyExpense.objects.get().expense_bucket, 'Marketing')
+        
+class CompanyExpenseDistributionTest(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser',password='testpassword')
+        self.company = Company.objects.create(user=self.user, company_name='Test Company')
+        self.client.login(username='testuser',password='testpassword')
+        CompanyExpense.objects.create(company_id=self.company, amount=1000.00, expense_bucket='Marketing')
+        CompanyExpense.objects.create(company_id=self.company, amount=500.00, expense_bucket='Operations')
+        CompanyExpense.objects.create(company_id=self.company, amount=500.00, expense_bucket='Development')
+        CompanyExpense.objects.create(company_id=self.company, amount=1000.00, expense_bucket='HR')
+        
+        
+    def test_expense_distribution(self):
+        expected_distribution = {
+            'Marketing':33.33,
+            'Operations':16.67,
+            'Development':16.67,
+            'HR':33.33
+        }
+        distribution = self.company.get_expense_distribution()
+        distribution = {k:round(v,2) for k,v in distribution.items()}
+        print(distribution)
+        
+        self.assertEqual(distribution, expected_distribution)

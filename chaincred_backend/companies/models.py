@@ -20,6 +20,7 @@ class Company(models.Model):
         updated_at (DateTimeField): The date and time when the company was last updated.
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    mobile_number = models.CharField(max_length=10, null=True, blank=True)
     company_id = models.AutoField(primary_key=True, unique=True)
     mobile_number = models.CharField(max_length=10)
     company_name = models.CharField(max_length=100, null=True, blank=True)
@@ -39,6 +40,30 @@ class Company(models.Model):
     runway_status = models.CharField(max_length=100,blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    def get_expense_distribution(self):
+        
+        expenses = CompanyExpense.objects.filter(company_id=self.company_id)
+        
+        categoriesed_expenses = {}
+        for expense in expenses:
+            bucket = expense.expense_bucket
+            amount = expense.amount
+            if bucket in categoriesed_expenses:
+                categoriesed_expenses[bucket] += amount
+            else:
+                categoriesed_expenses[bucket] = amount
+        
+        total_expenses = sum(categoriesed_expenses.values())
+        percentage_distribution = {category : float((amount/total_expenses)*100) for category, amount in categoriesed_expenses.items()}
+        
+        threshold = 1
+        for category, percentage in percentage_distribution.items():
+            if percentage < threshold:
+                percentage_distribution['Others'] = percentage_distribution.get('Others', 0) + percentage
+                del percentage_distribution[category]
+        
+        return percentage_distribution
     
 
 class CompanyFinance(models.Model):
@@ -81,14 +106,9 @@ class CompanyExpense(models.Model):
 
     id = models.AutoField(primary_key=True)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
-    document_name = models.CharField(max_length=100)
-    document_type = models.CharField(max_length=20,
-        choices=[('bank_statement', 'Bank Statement'), ('pitch_deck', 'Pitch Deck'), ('financial_report', 'Financial Report'),('other', 'Other')],
-        default='bank_statement'
-    )
+    expense_bucket = models.CharField(max_length=100, null=True, blank=True)
     amount = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True)
     remarks = models.TextField(null=True, blank=True)
-    document_file = models.FileField(upload_to='company_documents/', null=True, blank=True)
-    is_shared_with_investors = models.BooleanField(default=True)
+    document = models.FileField(upload_to='company_documents/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

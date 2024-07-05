@@ -3,9 +3,12 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import authenticate,logout
-from .models import Investor
+from .models import Investor,Investments
+from companies.models import CompanyExpense,Company
 from .serializers import InvestorSerializer
+from companies.serializers import CompanyExpenseSerializer,CompanySerializer
 
 class SignupView(APIView):
     """
@@ -85,3 +88,23 @@ class LogoutView(APIView):
         """
         logout(request)
         return Response({'message': 'Logged out successfully'}, status=status.HTTP_200_OK)
+    
+class InvestorInvestmentsView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def get(self,request):
+        investor = get_object_or_404(Investor, user=request.user)
+        investments = Investments.objects.filter(investor_id=investor)
+        data = []
+        for investment in investments:
+            company = investment.company_id
+            expenses = CompanyExpense.objects.filter(company_id=company)
+            company_data = CompanySerializer(company).data
+            expenses_data = CompanyExpenseSerializer(expenses, many=True).data
+            
+            data.append({
+                'company': company_data,
+                'expenses': expenses_data
+            })
+        return Response(data, status=status.HTTP_200_OK)
+    
