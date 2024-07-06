@@ -25,7 +25,7 @@ function Login() {
 
   const onSubmit = async (data) => {
     try {
-      const endpoint = activeTab === "for-founder" ? "/companies/login" : "/investors/login";
+      const endpoint = activeTab === "for-founder" ? "/companies/login/" : "/investors/login/";
       const res = await axios.post(`http://127.0.0.1:8000${endpoint}`, {
         email: data.email,
         password: data.password,

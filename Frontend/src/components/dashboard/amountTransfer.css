@@ -8,13 +8,14 @@ body, html {
   .sidebar-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
-    height: 1050px;
+    height: 100vh;
     /* width: 300px; */
     background-color: #0d193b;
     color: white;
     padding: 20px;
+    position: fixed;
   }
   
   .profile {
@@ -42,6 +43,8 @@ body, html {
   
   .card-container {
     width: 100%;
+    margin-top: 30px;
+    margin-bottom: 40px;
   }
   
   .card {
@@ -107,6 +110,7 @@ body, html {
     border: 1px dashed #C893FE;
     background: #1D3160;
     cursor: pointer;
+    margin-top: 30px;
   }
   
   .view-all-button:hover {

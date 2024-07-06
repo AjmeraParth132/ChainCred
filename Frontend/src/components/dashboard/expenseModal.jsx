@@ -39,14 +39,14 @@ function Expense() {
   };
 
   return (
-    <div className="expense-modal">
+    <div className="expense-modal ">
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box bg-slate-50 glass text-white">
           <h3 className="font-bold text-lg">Add Expense</h3>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} className="">
             <div className="form-control">
               <label>Document Name</label>
-              <input type="text" {...register("document_name", { required: true })} className="banner-field" />
+              <input type="text" {...register("document_name", { required: true })} className="banner-field text-black" />
               {errors.document_name && <span className="text-sm text-red-500">This field is required</span>}
             </div>
             <div className="form-control">
@@ -61,17 +61,17 @@ function Expense() {
             </div>
             <div className="form-control">
               <label>Amount</label>
-              <input type="number" {...register("amount", { required: true })} className="banner-field" />
+              <input type="number" {...register("amount", { required: true })} className="banner-field text-black" />
               {errors.amount && <span className="text-sm text-red-500">This field is required</span>}
             </div>
             <div className="form-control">
               <label>Remarks</label>
-              <textarea {...register("remarks", { required: true })} className="banner-field"></textarea>
+              <textarea {...register("remarks", { required: true })} className="banner-field text-black"></textarea>
               {errors.remarks && <span className="text-sm text-red-500">This field is required</span>}
             </div>
             <div className="form-control">
               <label>Document File</label>
-              <input type="file" {...register("document", { required: true })} className="" />
+              <input type="file" {...register("document", { required: true })} className="text-black" />
               {errors.document && <span className="text-sm text-red-500">This field is required</span>}
             </div>
             <div className="form-control custom-checkbox">
