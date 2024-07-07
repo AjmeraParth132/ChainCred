@@ -30,10 +30,11 @@
     /* gap: 10px; */
     border-top: 1px solid rgba(255, 255, 255, 0.14);
 border-right: 1px solid rgba(255, 255, 255, 0.14);
+border-left: 1px solid rgba(255, 255, 255, 0.14);
 border-bottom: 1px solid rgba(255, 255, 255, 0.14);
   }
 
-  .tab :hover{
+  .tabs :hover{
     background-color: #32324a;
   }
   
@@ -57,17 +58,30 @@ line-height: normal;
   }
   
   .spendings-chart, .runway, .total-asset-balance, .outflow-chart {
-    background-color: #051650;
-    padding: 20px;
     border-radius: 4px;
+background: #D0E3FF;
+    padding: 20px;
+    color: #0A2472;
+font-family: Montserrat;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+
   }
 
   .inflow-outflow-profit{
-    background-color: #051650;
+    background-color: #D0E3FF;
     padding: 20px;
     border-radius: 10px;
     display: flex;
     border-radius: 4px;
+    color: #0A2472;
+font-family: Montserrat;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
   }
   
   .legend {
@@ -139,4 +153,22 @@ background: #97A5DD;
   .dashboard-sidebar {
     position: fixed;
    
+  }
+
+  .profileIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #4a5b8d;
+    color: white;
+    font-size: 20px;
+    border-radius: 50%;
+  }
+
+  .header{
+    display: flex;
+    margin: 20px;
+    cursor: pointer;
   }

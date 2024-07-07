@@ -44,7 +44,7 @@ tr:hover {
 
 .table-container {
   position: relative;
-  max-height: 590px; 
+  max-height: 550px; 
   overflow-y: auto;
 }
 

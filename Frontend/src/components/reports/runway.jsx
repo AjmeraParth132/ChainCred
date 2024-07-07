@@ -17,9 +17,9 @@ const Runway = () => {
   return (
     <Box sx={{borderRadius: 2, p: 3, mb: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
       <Box>
-        <Typography variant="h6" color="#ffffff" className='text-2xl'>Runway</Typography>
-        <Typography variant="h3" color="#ffffff" sx={{ marginTop: 1, marginBottom: 1 }}>68 Months</Typography>
-        <Typography color="#ffffff">You have an average monthly burn of $26,700</Typography>
+        <Typography variant="h6" color="#0A2472" className='text-2xl'>Runway</Typography>
+        <Typography variant="h3" color="#0A2472" sx={{ marginTop: 1, marginBottom: 1 }}>68 Months</Typography>
+        <Typography color="#0A2472">You have an average monthly burn of $26,700</Typography>
       </Box>
       <Box sx={{ marginTop: 2 }}>
         <ResponsiveContainer width="100%" height={200}>
