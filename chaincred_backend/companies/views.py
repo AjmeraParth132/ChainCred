@@ -116,3 +116,20 @@ class CompanyExpenseViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+class ExpenseDistributionAPIView(APIView):
+    """
+    A view for getting the distribution of company expenses.
+
+    Methods:
+        get: Gets the distribution of company expenses.
+    """
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, company_id, *args, **kwargs):
+        try:
+            company = Company.objects.get(company_id=company_id)
+            distribution = company.get_expense_distribution()
+            return Response(distribution, status=status.HTTP_200_OK)
+        except Company.DoesNotExist:
+            return Response({'error': 'Company not found'}, status=status.HTTP_404_NOT_FOUND)
