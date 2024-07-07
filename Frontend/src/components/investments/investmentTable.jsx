@@ -95,7 +95,7 @@ const InvestmentsTable = () => {
             </svg>
           </label>
           <div className="sort-container">
-          <label className="">
+          <label className="text-slate-300">
             Sort By Date:
             <select 
               className="sort" 

@@ -70,14 +70,21 @@ const Reports = () => {
         {/* <Sidebar /> */}
       </div>
       <div className="reports ms-2">
+        <div className="header">
         <h1 className="report-heading font-bold text-4xl mb-10">Reports</h1>
-        <div className="tabs mb-10">
+        <div className='profileIcon'>
+          <span>P</span>
+        </div>
+       
+        </div>
+        <div className="tabs mb-10 ms-5">
           <div className="tab"><a href="">Balance Sheet</a></div>
           <div className="tab"><a href="">Profit & Loss</a></div>
           <div className="tab"><a href="">Spendings</a></div>
           <div className="tab"><a href="">KPI</a></div>
           <div className="tab"><a href="">Overview</a></div>
         </div>
+        
         <div className="content-container">
           <div className="spendings-chart">
             <h2 className="text-2xl">Spendings</h2>
@@ -87,10 +94,10 @@ const Reports = () => {
                   data={dataPie1}
                   cx="50%"
                   cy="50%"
-                  innerRadius={60}
-                  outerRadius={80}
+                  innerRadius={80}
+                  outerRadius={100}
                   fill="#8884d8"
-                  paddingAngle={5}
+                  paddingAngle={2}
                   dataKey="value"
                 >
                   {dataPie1.map((entry, index) => (
@@ -132,10 +139,10 @@ const Reports = () => {
           <div className="total-asset-balance h-[360px]">
             <div className="TAB ">
             <h2 className="text-2xl">Total Asset Balance</h2>
-            <div className="previous-week text-black">Previous week</div>
+            <div className="previous-week text-black mb-5">Previous week</div>
             </div>
             
-            <ResponsiveContainer width="100%" height={200}>
+            <ResponsiveContainer width="100%" height={270}>
               <LineChart data={dataLine}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
@@ -158,7 +165,7 @@ const Reports = () => {
                   innerRadius={60}
                   outerRadius={80}
                   fill="#8884d8"
-                  paddingAngle={5}
+                  paddingAngle={2}
                   dataKey="value"
                 >
                   {dataPie2.map((entry, index) => (

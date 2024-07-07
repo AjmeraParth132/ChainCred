@@ -28,7 +28,7 @@ function Sidebar() {
           <li><Link to="/bank-accounts"><AccountBalance /> Bank Accounts</Link></li>
           <li><Link to="/notifications"><Notifications /> Notifications</Link></li>
             </div>
-         <div className="lower-sidebar mt-32">
+         <div className="lower-sidebar mt-10">
          <li><Link to="/settings"><Settings /> Settings</Link></li>
          <li><Link to="/logout"><ExitToApp /> Log out</Link></li>
          </div>

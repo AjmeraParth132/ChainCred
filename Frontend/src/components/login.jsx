@@ -27,7 +27,7 @@ function Login() {
     try {
       const endpoint = activeTab === "for-founder" ? "/companies/login/" : "/investors/login/";
       const res = await axios.post(`http://127.0.0.1:8000${endpoint}`, {
-        email: data.email,
+        username: data.username,
         password: data.password,
       });
       toast.success("Welcome to CredChain!");
@@ -67,17 +67,17 @@ function Login() {
                 </div>
               </div>
 
-              <h1 className="text-white text-4xl font-Montserrat">Welcome to CredChain!</h1>
+              <h1 className="text-white text-4xl font-Montserrat">Welcome to ChainCred!</h1>
               <div className="text-[#ffffff80] font-Montserrats">Log In to access your financial data in a few easy steps.</div>
 
               <div className="form-control mt-6">
                 <input
-                  type="email"
-                  placeholder="Email address"
+                  type="text"
+                  placeholder="Enter your username"
                   className="login-email px-3 py-2  border-none flex items-center text-white"
-                  {...register("email", { required: true })}
+                  {...register("username", { required: true })}
                 />
-                {errors.email && <span className="text-sm text-red-500">This field is required</span>}
+                {errors.username && <span className="text-sm text-red-500">This field is required</span>}
               </div>
 
               <div className="relative mt-6 w-[534px]">

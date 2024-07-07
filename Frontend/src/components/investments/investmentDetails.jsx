@@ -104,10 +104,10 @@ const InvestmentDetails = () => {
                 data={pieData}
                 cx="50%"
                 cy="50%"
-                innerRadius={60}
-                outerRadius={80}
+                innerRadius={100}
+                outerRadius={120}
                 fill="#8884d8"
-                paddingAngle={5}
+                paddingAngle={2}
                 dataKey="value"
               >
                 {pieData.map((entry, index) => (
