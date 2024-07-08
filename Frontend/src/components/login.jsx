@@ -31,9 +31,11 @@ function Login() {
         password: data.password,
       });
       toast.success("Welcome to CredChain!");
+      // console.log(res.data);
       setTimeout(() => {
         window.location.reload();
-        localStorage.setItem("Users", JSON.stringify(res.data.user));
+        localStorage.setItem("User", JSON.stringify(res.data.company_id || res.data.investor_id));
+
       }, 1000);
     } catch (error) {
       toast.error("Invalid email or password!!", {
