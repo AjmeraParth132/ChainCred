@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Modal from "react-modal";
@@ -9,22 +9,34 @@ Modal.setAppElement("#root");
 
 function Expense() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const [user, setUser] = useState(null);
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem("User");
+  //   if (storedUser) {
+  //     console.log(storedUser);
+  //     setUser(JSON.parse(storedUser));
+  //   }
+  // }, []);
 
   const onSubmit = async (data) => {
     const formData = new FormData();
+    formData.append('company_id', localStorage.getItem("User"))
     formData.append('document_name', data.document_name);
-    formData.append('document_type', data.document_type);
+    formData.append('expense_bucket', data.expense_bucket);
     formData.append('amount', data.amount);
     formData.append('remarks', data.remarks);
-    formData.append('document_file', data.document[0]);
-    formData.append('is_shared_with_investors', data.is_shared_with_investors);
-
+    if (data.document[0] !== undefined)
+      formData.append('document_file', data.document[0]);
+    console.log(formData);
+    console.log(localStorage.getItem("User")[0]);
     try {
       const response = await axios.post('http://127.0.0.1:8000/companies/company_expenses/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
-      });
+      }
+      );
+      
 
       if (response.status === 201) {
         console.log('Expense created successfully');
@@ -50,14 +62,15 @@ function Expense() {
               {errors.document_name && <span className="text-sm text-red-500">This field is required</span>}
             </div>
             <div className="form-control">
-              <label>Document Type</label>
-              <select {...register("document_type", { required: true })} className="banner-field text-black">
-                <option value="bank_statement">Bank Statement</option>
-                <option value="pitch_deck">Pitch Deck</option>
-                <option value="financial_report">Financial Report</option>
-                <option value="other">Other</option>
+              <label>Expense Bucket</label>
+              <select {...register("expense_bucket", { required: true })} className="banner-field text-black">
+                <option value="salaries">Salaries</option>
+                <option value="reimbursements">Reimbursements</option>
+                <option value="hr">HR Budget</option>
+                <option value="operations">Operations</option>
+                <option value="employee_perks">Employee Perks</option>
               </select>
-              {errors.document_type && <span className="text-sm text-red-500">This field is required</span>}
+              {errors.expense_bucket && <span className="text-sm text-red-500">This field is required</span>}
             </div>
             <div className="form-control">
               <label>Amount</label>
@@ -71,12 +84,13 @@ function Expense() {
             </div>
             <div className="form-control">
               <label>Document File</label>
-              <input type="file" {...register("document", { required: true })} className="text-black" />
+              <input type="file" {...register("document")} className="text-black" />
               {errors.document && <span className="text-sm text-red-500">This field is required</span>}
             </div>
-            <div className="form-control custom-checkbox">
-              <input type="checkbox" id="is_shared_with_investors" {...register("is_shared_with_investors")} />
-              <label htmlFor="is_shared_with_investors">Share with Investors</label>
+            <div className="form-control">
+              <label>Date</label>
+              <input type="date" {...register("date")} className="banner-field text-black" />
+              
             </div>
             <div className="modal-action">
               <button type="submit" className="btn save-btn">Upload</button>

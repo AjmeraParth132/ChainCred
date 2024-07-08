@@ -65,8 +65,10 @@ class CompanyExpenseCreateTest(APITestCase):
             'company_id':self.company.pk,
             'amount':1000.00,
             'remarks':'Test Expense',
-            'document':None,
+            'document_file':None,
+            'document_name':'Balance Sheet',
             'expense_bucket':'Marketing',
+            'date':'2021-01-01'
         }
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, 201)

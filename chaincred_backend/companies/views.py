@@ -97,20 +97,22 @@ class CompanyExpenseViewSet(viewsets.ModelViewSet):
     """
     queryset = CompanyExpense.objects.all()
     serializer_class = CompanyExpenseSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     
     def create(self,request,*args, **kwargs):
-        if not request.user.is_authenticated:
-            return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
+        # if not request.user.is_authenticated:
+        #     return Response({'error': 'Authentication required'}, status=status.HTTP_401_UNAUTHORIZED)
         company_id = request.data.get('company_id')
+        # print(company_id)
         try:
             company = Company.objects.get(company_id=company_id)
         except Company.DoesNotExist:
             return Response({'error': 'Company not found'}, status=status.HTTP_404_NOT_FOUND)
         
-        
+        # print(request.data)
         serializer = self.get_serializer(data=request.data)
         # print(request.data)
+        # print(serializer)
         if serializer.is_valid():
             serializer.save(company_id=company)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
