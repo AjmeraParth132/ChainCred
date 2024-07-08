@@ -16,10 +16,11 @@ class Investor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     mobile_number = models.CharField(max_length=10)
     investor_id = models.AutoField(unique=True, primary_key=True)
+    mobile_number = models.CharField(max_length=10, null=True, blank=True)
     investor_company = models.CharField(max_length=100, null=True, blank=True)
     investment_focus = models.CharField(max_length=100, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)  
     
 class Investments(models.Model):
     """
@@ -41,8 +42,8 @@ class Investments(models.Model):
     investment_id = models.AutoField(primary_key=True)
     investor_id = models.ForeignKey(Investor, on_delete=models.CASCADE)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
-    investment_date = models.DateField()
-    amount_invested = models.DecimalField(max_digits=20, decimal_places=2)
+    # investment_date = models.DateField()
+    amount_invested = models.DecimalField(max_digits=20, decimal_places=2,null=True, blank=True)
     investment_round = models.CharField(
         max_length=20,
         choices=[('seed', 'Seed'), ('series a', 'Series A'), ('series b', 'Series B'), ('series c', 'Series C')],
@@ -53,8 +54,8 @@ class Investments(models.Model):
         choices=[('angel', 'Angel'), ('vc', 'VC'), ('both', 'BOTH')],
         default='angel'
     )
-    return_on_investment = models.DecimalField(max_digits=20, decimal_places=2)
-    current_valuation = models.DecimalField(max_digits=20, decimal_places=2)
+    return_on_investment = models.DecimalField(max_digits=20, decimal_places=2,null=True, blank=True)
+    current_valuation = models.DecimalField(max_digits=20, decimal_places=2,null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
