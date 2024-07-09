@@ -2,6 +2,7 @@
 import React from 'react';
 import './transactions.css';
 import Expense from './expenseModal';
+import Income from './incomeModal';
 
 const transactions = [
   {
@@ -67,8 +68,12 @@ const Transactions = () => {
           </div>
         ))}
       </div>
-      <button className="add-expense-button" onClick={() => document.getElementById("my_modal_1").showModal()}>+ Add Expense</button>
-      <Expense/>
+      <div className='row-transaction'>
+        <button className="add-expense-button" onClick={() => document.getElementById("my_modal_1").showModal()}>+ Add Expense</button>
+        <Expense />
+        <button className="add-expense-button" onClick={() => document.getElementById('my_modal_2').showModal()}>+ Add Income</button>
+        <Income/>
+      </div>
     </div>
   );
 };
