@@ -51,6 +51,7 @@ function FinanceStatementCompany() {
         console.log('Expense created successfully');
         reset();
         // history.push("/");
+        window.location.href = '/';
       } else {
         console.error('Failed to create expense');
       }

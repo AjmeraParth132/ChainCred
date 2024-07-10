@@ -52,8 +52,15 @@ function Signup() {
         const res = await axios.post(`http://127.0.0.1:8000${endpoint}`, payload);
       toast.success("Account created successfully!");
       setTimeout(() => {
-        window.location.reload();
         localStorage.setItem("User", JSON.stringify(res.data.company_id || res.data.investor_id));
+        if (data.is_company) {
+          // localStorage.setItem("Company", JSON.stringify(res.data.company_id));
+          window.location.href = "/company-form";
+        }
+        else {
+          // localStorage.setItem("Investor", JSON.stringify(res.data.investor_id));
+          window.location.href = "/investor-form";
+        }
       }, 1000);
     } catch (error) {
       toast.error("Error " + error.message, {
