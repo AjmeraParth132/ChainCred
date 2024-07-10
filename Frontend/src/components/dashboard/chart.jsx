@@ -1,5 +1,5 @@
 import React from 'react';
-import './chart.css';
+import styles from './Chart.module.css';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const data = [
@@ -19,7 +19,7 @@ const data = [
 
 const Chart = () => {
   return (
-    <div className="chart">
+    <div className={styles.chart}>
       <h2>Latest Transactions</h2>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data}>

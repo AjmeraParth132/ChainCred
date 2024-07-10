@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Modal from "react-modal";
-import "./expenseModal.css";
+import styles from "./expenseModal.module.css";
 
 
 Modal.setAppElement("#root");
@@ -17,7 +17,7 @@ function Expense() {
     formData.append('amount', data.amount);
     formData.append('remarks', data.remarks);
     formData.append('document_file', data.document[0]);
-    formData.append('is_shared_with_investors', data.is_shared_with_investors);
+
 
     try {
       const response = await axios.post('http://127.0.0.1:8000/companies/company_expenses/', formData, {
@@ -71,13 +71,13 @@ function Expense() {
             </div>
             <div className="form-control">
               <label>Document File</label>
-              <input type="file" {...register("document", { required: true })} className="text-black" />
-              {errors.document && <span className="text-sm text-red-500">This field is required</span>}
+              <input type="file" {...register("document")} className="text-black" />
+              {/* {errors.document && <span className="text-sm text-red-500">This field is required</span>} */}
             </div>
-            <div className="form-control custom-checkbox">
+            {/* <div className="form-control custom-checkbox">
               <input type="checkbox" id="is_shared_with_investors" {...register("is_shared_with_investors")} />
               <label htmlFor="is_shared_with_investors">Share with Investors</label>
-            </div>
+            </div> */}
             <div className="modal-action">
               <button type="submit" className="btn save-btn">Upload</button>
               <button type="button" className="btn close-btn" onClick={() => document.getElementById("my_modal_1").close()}>Close</button>
