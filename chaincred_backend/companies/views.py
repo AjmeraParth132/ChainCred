@@ -174,3 +174,20 @@ class FinanceStatementAPI(APIView):
             else:
                 return Response(income_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response({'message': 'Finance statement saved successfully'}, status=status.HTTP_201_CREATED)
+
+class CompanyIncomeAPIView(APIView):
+    def post(self,request):
+        company_id = request.data.get('company_id')
+        income_data = {
+            'company_id': company_id,
+            'income_type': request.data.get('income_type'),
+            'amount': request.data.get('amount'),
+            'date': request.data.get('date'),
+            'remarks': request.data.get('remarks'),
+            'document_name': request.data.get('document_name') if request.data.get('document_name') else '',
+        }
+        income_serializer = CompanyIncomeSerializer(data=income_data)
+        if income_serializer.is_valid():
+            income_serializer.save()
+            return Response(income_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(income_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
