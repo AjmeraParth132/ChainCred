@@ -53,7 +53,7 @@ function Income() {
     <div className="expense-modal ">
       <dialog id="my_modal_2" className="modal">
         <div className="modal-box bg-slate-50 glass text-white">
-          <h3 className="font-bold text-lg">Add Expense</h3>
+          <h3 className="font-bold text-lg">Add Income</h3>
           <form onSubmit={handleSubmit(onSubmit)} className="">
             <div className="form-control">
               <label>Document Name</label>
