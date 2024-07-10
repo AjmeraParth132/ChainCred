@@ -6,7 +6,8 @@ from rest_framework import status,viewsets
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import authenticate,logout
 from .models import Company,CompanyExpense
-from .serializers import CompanySerializer,CompanyExpenseSerializer
+from .serializers import CompanySerializer,CompanyExpenseSerializer,CompanyIncomeSerializer
+from datetime import datetime, timedelta
 
 class SignupView(APIView):
     """
@@ -135,3 +136,41 @@ class ExpenseDistributionAPIView(APIView):
             return Response(distribution, status=status.HTTP_200_OK)
         except Company.DoesNotExist:
             return Response({'error': 'Company not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+class FinanceStatementAPI(APIView):
+    def post(self,request):
+        company_id = request.data.get('company_id')
+        current_valuation = request.data.get('current_valuation')
+        try :
+            company = Company.objects.get(company_id=company_id)
+            company.current_valuation = current_valuation
+            company.save()
+        except Company.DoesNotExist:
+            return Response({'error': 'Company not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+        for month in ['month_1','month_2','month_3']:
+            expense_data = {
+                'company_id': company_id,
+                'expense_bucket': f'{month} outflow',
+                'amount': request.data.get(f"{month}_outflow"),
+                'date': (datetime.now() - timedelta(days=int(month[-1])*30)).strftime('%Y-%m-%d')
+            }
+            income_data = {
+                'company_id': company_id,
+                'income_type': f'{month} inflow',
+                'amount': request.data.get(f"{month}_inflow"),
+                'date': (datetime.now() - timedelta(days=int(month[-1])*30)).strftime('%Y-%m-%d')
+            }
+            expense_serializer = CompanyExpenseSerializer(data=expense_data)
+            income_serializer = CompanyIncomeSerializer(data=income_data)
+            
+            if expense_serializer.is_valid():
+                expense_serializer.save()
+            else:
+                return Response(expense_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
+            if income_serializer.is_valid():
+                income_serializer.save()
+            else:
+                return Response(income_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'message': 'Finance statement saved successfully'}, status=status.HTTP_201_CREATED)

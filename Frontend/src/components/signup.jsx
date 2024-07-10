@@ -53,6 +53,7 @@ function Signup() {
       toast.success("Account created successfully!");
       setTimeout(() => {
         window.location.reload();
+        localStorage.setItem("User", JSON.stringify(res.data.company_id || res.data.investor_id));
       }, 1000);
     } catch (error) {
       toast.error("Error " + error.message, {

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
+import axios from 'axios';
+// import { useHistory } from 'react-router-dom';
 import './oneTimeInfo.css';
 
 function InvestmentForm() {
+  // const history = useHistory();
   const { register, control, handleSubmit, watch, formState: { errors } } = useForm({
     defaultValues: {
       companies: [{ companyName: '', amount: '', ceo: '', date: '', valuation: '' }]
@@ -15,8 +18,41 @@ function InvestmentForm() {
     const companiesWatch = watch('companies')
 
   const onSubmit = async (data) => {
-    // Handle form submission, e.g., send data to an API
-    console.log(data);
+    const formData = new FormData();
+    formData.append('investor_id', localStorage.getItem("User"));
+    data.companies.forEach((company, index) => {
+      formData.append(`companies[${index}][companyName]`, company.companyName);
+      formData.append(`companies[${index}][amount]`, company.amount);
+      formData.append(`companies[${index}][ceo]`, company.ceo);
+      formData.append(`companies[${index}][date]`, company.date);
+      formData.append(`companies[${index}][valuation]`, company.valuation);
+    });
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+    console.log(data)
+    
+    
+      try {
+      const response = await axios.post('http://127.0.0.1:8000/investors/otf/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+      );
+      
+
+      if (response.status === 200) {
+        console.log('Investments Added successfully');
+        reset();
+        // history.push("/");
+        
+      } else {
+        console.error('Failed to create expense');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (

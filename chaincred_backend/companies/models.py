@@ -69,7 +69,7 @@ class CompanyIncome(models.Model):
     
     id = models.AutoField(primary_key=True)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
-    income_type = models.CharField(choices=(('clients','Clients'),('grants','Grants'),('outsourcing','Outsourcing')),default='clients',null=True,blank=True)
+    income_type = models.CharField(max_length=50,null=True,blank=True)
     amount = models.DecimalField(max_digits=20,decimal_places=2,blank=True,null=True)
     date = models.DateField(null=True,blank=True)
     remarks = models.TextField(null=True,blank=True)
