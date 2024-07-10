@@ -1,5 +1,6 @@
 from django.test import TestCase
 from rest_framework.test import APIClient
+from rest_framework import status
 from django.contrib.auth.models import User
 from .models import Investor,Investments
 from companies.models import CompanyExpense,Company
@@ -63,8 +64,8 @@ class InvestorInvestmentsViewTestCase(TestCase):
         
         self.company1 = Company.objects.create(company_name='Test Company 1', user=self.company_user1)
         self.company2 = Company.objects.create(company_name='Test Company 2', user=self.company_user2)
-        Investments.objects.create(investor_id=self.investor, company_id=self.company1, amount_invested=10000)
-        Investments.objects.create(investor_id=self.investor, company_id=self.company2, amount_invested=20000)
+        Investments.objects.create(investor_id=self.investor, company_id=self.company1, amount=10000)
+        Investments.objects.create(investor_id=self.investor, company_id=self.company2, amount=20000)
         
         CompanyExpense.objects.create(company_id=self.company1, amount=5000)
         CompanyExpense.objects.create(company_id=self.company2, amount=10000)
@@ -87,8 +88,8 @@ class InvestmentExpenseDistributionTestCase(TestCase):
         
         self.company1 = Company.objects.create(company_name='Test Company 1', user=self.company_user1)
         self.company2 = Company.objects.create(company_name='Test Company 2', user=self.company_user2)
-        Investments.objects.create(investor_id=self.investor, company_id=self.company1, amount_invested=10000)
-        Investments.objects.create(investor_id=self.investor, company_id=self.company2, amount_invested=20000)
+        Investments.objects.create(investor_id=self.investor, company_id=self.company1, amount=10000)
+        Investments.objects.create(investor_id=self.investor, company_id=self.company2, amount=20000)
         
         CompanyExpense.objects.create(company_id=self.company1, amount=5000, expense_bucket='Marketing')
         CompanyExpense.objects.create(company_id=self.company1, amount=5000, expense_bucket='Operations')
@@ -100,3 +101,36 @@ class InvestmentExpenseDistributionTestCase(TestCase):
         url = '/investors/expense-distribution/'
         respone = self.client.get(url)
         self.assertEqual(respone.status_code, 200)
+        
+class InvestmentAPITestCase(TestCase):
+    def setUp(self):
+        # Create a user and investor
+        self.user = User.objects.create_user(username='testuser', password='12345')
+        self.investor = Investor.objects.create(
+            user=self.user,
+            mobile_number='1234567890',
+            investor_company='Test Company',
+            investment_focus='Tech'
+        )
+
+    def test_add_investments(self):
+        url = "/investors/otf/"  # Replace with the actual URL name of FirstTimeInvestmentsView
+        data = {
+            'investor_id': self.investor.investor_id,
+            'companies[0][companyName]': 'Company A',
+            'companies[0][amount]': '10000.00',
+            'companies[0][ceo]': 'CEO A',
+            'companies[0][date]': '2023-01-01',
+            'companies[0][valuation]': '50000.00',
+            # Add more companies as needed
+        }
+        response = self.client.post(url, data, format='json')
+        
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Investments.objects.count(), 1)
+        investment = Investments.objects.first()
+        self.assertEqual(investment.company_name, 'Company A')
+        self.assertEqual(investment.amount, 10000.00)
+        self.assertEqual(investment.CEO, 'CEO A')
+        self.assertEqual(investment.valuation, 50000.00)
+        self.assertEqual(investment.investor_id, self.investor)

@@ -126,7 +126,7 @@ class InvestorExpenseDistributionView(APIView):
 class FirstTimeInvestmentsView(APIView):
     def post(self,request):
         investor_id = request.data.get('investor_id')
-        total_investments = (len(request.data) - 1)/5
+        total_investments = int((len(request.data) - 1)/5)
         for i in range(total_investments):
             company_name = request.data.get(f'companies[{i}][companyName]')
             amount = request.data.get(f'companies[{i}][amount]')
@@ -137,7 +137,7 @@ class FirstTimeInvestmentsView(APIView):
                 investor_id=Investor.objects.get(investor_id=investor_id),
                 company_name=company_name,
                 amount=amount,
-                ceo=ceo,
+                CEO=ceo,
                 date=date,
                 valuation=valuation
             )
