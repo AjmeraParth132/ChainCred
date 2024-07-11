@@ -7,9 +7,9 @@ import "./expenseModal.css";
 
 Modal.setAppElement("#root");
 
-function Expense() {
+function Income() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
-  const [user, setUser] = useState(null);
+//   const [user, setUser] = useState(null);
   // useEffect(() => {
   //   const storedUser = localStorage.getItem("User");
   //   if (storedUser) {
@@ -22,16 +22,14 @@ function Expense() {
     const formData = new FormData();
     formData.append('company_id', localStorage.getItem("User"))
     formData.append('document_name', data.document_name);
-    formData.append('expense_bucket', data.expense_bucket);
+    formData.append('income_type', data.income_type);
     formData.append('amount', data.amount);
     formData.append('remarks', data.remarks);
     formData.append('date', data.date);
-    if (data.document[0] !== undefined)
-      formData.append('document_file', data.document[0]);
     console.log(formData);
     console.log(localStorage.getItem("User")[0]);
     try {
-      const response = await axios.post('http://127.0.0.1:8000/companies/company_expenses/', formData, {
+      const response = await axios.post('http://127.0.0.1:8000/companies/income/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -41,7 +39,7 @@ function Expense() {
 
       if (response.status === 201) {
         console.log('Expense created successfully');
-        document.getElementById("my_modal_1").close();
+        document.getElementById("my_modal_2").close();
         reset();
       } else {
         console.error('Failed to create expense');
@@ -53,9 +51,9 @@ function Expense() {
 
   return (
     <div className="expense-modal ">
-      <dialog id="my_modal_1" className="modal">
+      <dialog id="my_modal_2" className="modal">
         <div className="modal-box bg-slate-50 glass text-white">
-          <h3 className="font-bold text-lg">Add Expense</h3>
+          <h3 className="font-bold text-lg">Add Income</h3>
           <form onSubmit={handleSubmit(onSubmit)} className="">
             <div className="form-control">
               <label>Document Name</label>
@@ -63,13 +61,12 @@ function Expense() {
               {errors.document_name && <span className="text-sm text-red-500">This field is required</span>}
             </div>
             <div className="form-control">
-              <label>Expense Bucket</label>
-              <select {...register("expense_bucket", { required: true })} className="banner-field text-black">
-                <option value="salaries">Salaries</option>
-                <option value="reimbursements">Reimbursements</option>
-                <option value="hr">HR Budget</option>
-                <option value="operations">Operations</option>
-                <option value="employee_perks">Employee Perks</option>
+              <label>Type of Income</label>
+              <select {...register("income_type", { required: true })} className="banner-field text-black">
+                <option value="clients">Clients</option>
+                <option value="grants">Grants</option>
+                <option value="outsourcing">Out Sourcing</option>
+                
               </select>
               {errors.expense_bucket && <span className="text-sm text-red-500">This field is required</span>}
             </div>
@@ -84,18 +81,13 @@ function Expense() {
               {errors.remarks && <span className="text-sm text-red-500">This field is required</span>}
             </div>
             <div className="form-control">
-              <label>Document File</label>
-              <input type="file" {...register("document")} className="text-black" />
-              {errors.document && <span className="text-sm text-red-500">This field is required</span>}
-            </div>
-            <div className="form-control">
               <label>Date</label>
               <input type="date" {...register("date")} className="banner-field text-black" />
-
+              
             </div>
             <div className="modal-action">
               <button type="submit" className="btn save-btn">Upload</button>
-              <button type="button" className="btn close-btn" onClick={() => document.getElementById("my_modal_1").close()}>Close</button>
+              <button type="button" className="btn close-btn" onClick={() => document.getElementById("my_modal_2").close()}>Close</button>
             </div>
           </form>
         </div>
@@ -104,4 +96,4 @@ function Expense() {
   );
 }
 
-export default Expense;
+export default Income;

@@ -122,3 +122,23 @@ class InvestorExpenseDistributionView(APIView):
             expense_distribution = company.get_expense_distribution()
             expense_distributions[company.company_name] = expense_distribution
         return Response(expense_distributions, status=status.HTTP_200_OK)
+
+class FirstTimeInvestmentsView(APIView):
+    def post(self,request):
+        investor_id = request.data.get('investor_id')
+        total_investments = int((len(request.data) - 1)/5)
+        for i in range(total_investments):
+            company_name = request.data.get(f'companies[{i}][companyName]')
+            amount = request.data.get(f'companies[{i}][amount]')
+            ceo = request.data.get(f'companies[{i}][ceo]')
+            date = request.data.get(f'companies[{i}][date]')
+            valuation = request.data.get(f'companies[{i}][valuation]')
+            Investments.objects.create(
+                investor_id=Investor.objects.get(investor_id=investor_id),
+                company_name=company_name,
+                amount=amount,
+                CEO=ceo,
+                date=date,
+                valuation=valuation
+            )
+        return Response({'message': 'Investments added successfully'}, status=status.HTTP_200_OK)
