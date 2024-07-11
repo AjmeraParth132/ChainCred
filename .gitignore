@@ -1,3 +1,4 @@
 venv/
 myvenv/
 chaincred_backend/db.sqlite3
+chaincred_backend/chaincred_backend/__pycache__
