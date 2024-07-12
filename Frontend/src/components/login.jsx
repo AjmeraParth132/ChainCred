@@ -37,6 +37,7 @@ function Login() {
       setTimeout(() => {
         window.location.reload();
         localStorage.setItem("User", JSON.stringify(res.data.company_id || res.data.investor_id));
+        navigate("/dashboard");
 
       }, 1000);
     } catch (error) {
