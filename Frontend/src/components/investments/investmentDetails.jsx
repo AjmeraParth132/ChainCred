@@ -74,13 +74,11 @@ const InvestmentDetails = () => {
 
   return (
     <div className={styles.investmentDetails}>
-        <div className="dashboard-sidebar me-10">
+        <div className={styles.dashboardSidebar}>
         <Sidebar />
       </div>
-      <div className="me-5 w-[220px]">
-        <Sidebar />
-      </div>
-      <div className="content w-[1150px]">
+      
+      <div className={styles.content}>
       <header className={styles.header}>
         <div className={styles.headerLeft}>
           <h1 className={styles.headerTitle}>Investments</h1>

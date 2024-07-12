@@ -2,7 +2,7 @@ import React, { useEffect,useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Modal from "react-modal";
-import "./expenseModal.css";
+import "./expenseModal.module.css";
 
 
 Modal.setAppElement("#root");

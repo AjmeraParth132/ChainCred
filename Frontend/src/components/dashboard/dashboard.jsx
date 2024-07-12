@@ -5,48 +5,39 @@ import Cards from "./cards";
 import Transactions from "./transaction";
 import Chart from "./chart";
 import AmountTransfer from "./amountTransfer";
-
-import "./dashboard.css"; // You can use this file for styling
+import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {
   const userType = localStorage.getItem("UserType");
   return (
-    <div className="dashboard-container justify-stretch">
-      
-      <div className="dashboard-sidebar me-10 justify-start ">
-        <Sidebar userType={userType}/>
+    <div className={styles.dashboardContainer}>
+      <div className={styles.dashboardSidebar}>
+        <Sidebar userType={userType } />
       </div>
-      <div className="me-5 w-[220px]">
-        {/* <Sidebar /> */}
-      </div>
-      <div className="dashboard-content">
-        <div className="main-content">
-          
-         
-          <Header />
-         
-          <div className="dashboard-stats">
-            <div className="stat glass">
-              <h3>Outstanding Balance</h3>
+      <div className={styles.dashboardContent}>
+        <Header />
+        <div className={styles.mainContent}>
+          <div className={styles.dashboardStats}>
+            <div className={`${styles.stat} glass`}>
+              <h3>Account Balance</h3>
               <p>$56,500</p>
             </div>
-            <div className="stat glass">
-              <h3>Total Income</h3>
+            <div className={`${styles.stat} glass`}>
+              <h3>Last month Income</h3>
               <p>$10,550</p>
             </div>
-            <div className="stat glass">
-              <h3>Total Expenses</h3>
+            <div className={`${styles.stat} glass`}>
+              <h3>Last month Expenses</h3>
               <p>$46,505</p>
             </div>
           </div>
-
           <Chart />
           <Transactions />
         </div>
       </div>
-      <div className="amount-transfer ms-10 justify-end">
-          <AmountTransfer />
-        </div>
+      <div className={styles.amountTransfer}>
+        <AmountTransfer />
+      </div>
     </div>
   );
 };

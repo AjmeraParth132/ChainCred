@@ -6,7 +6,7 @@ import loginImg from "../../public/login.png";
 import "../index.css";
 import "../../public/style/login.css";
 import Navbar from "./navbar";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = userNavigate();
@@ -39,6 +39,7 @@ function Login() {
         const userType = activeTab === "for-founder" ? "company" : "investor";
         localStorage.setItem("User", JSON.stringify(res.data.company_id || res.data.investor_id));
         localStorage.setItem("UserType", userType);
+        navigate("/dashboard");
 
       }, 1000);
     } catch (error) {
@@ -60,33 +61,33 @@ function Login() {
             <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
               <div className="founder mb-8">
                 <div
-                  className={`toggle-box for-investors m-0 justify-center ${activeTab === "for-founder" ? "active" : ""}`}
+                  className={`FI_box for-investors justify-center ${activeTab === "for-founder" ? "live" : ""}`}
                   onClick={() => toggleTab("for-founder")}
                 >
-                  <h1>For Founders</h1>
+                  <p className="text-4xl">For Founders</p>
                 </div>
                 <div
-                  className={`toggle-box for-investors justify-center ${activeTab === "for-investors" ? "active" : ""}`}
+                  className={`FI-box for-investors justify-center ${activeTab === "for-investors" ? "live" : ""}`}
                   onClick={() => toggleTab("for-investors")}
                 >
-                  <h1>For Investors</h1>
+                  <p className="text-4xl">For Investors</p>
                 </div>
               </div>
 
               <h1 className="text-white text-4xl font-Montserrat">Welcome to ChainCred!</h1>
               <div className="text-[#ffffff80] font-Montserrats">Log In to access your financial data in a few easy steps.</div>
 
-              <div className="form-control mt-6">
+              <div className="form-control mt-6 w-[100%] border-none">
                 <input
                   type="text"
                   placeholder="Enter your username"
-                  className="login-email px-3 py-2  border-none flex items-center text-white"
+                  className="login-username px-3 py-2  border-none flex items-center text-white"
                   {...register("username", { required: true })}
                 />
                 {errors.username && <span className="text-sm text-red-500">This field is required</span>}
               </div>
 
-              <div className="relative mt-6 w-[534px]">
+              <div className="relative  w-[100%]">
                 <input
                   className="px-3 py-2 login-pass border-none flex items-center text-white"
                   type={showPassword ? "text" : "password"}
@@ -111,11 +112,11 @@ function Login() {
                 {errors.password && <span className="text-sm text-red-500">This field is required</span>}
               </div>
 
-              <div className="form-control mt-6">
+              <div className="form-control mt-6 w-[100%]">
                 <button className="bg-[#FFE344] login-btn hover:bg-[#f2d846]">Login</button>
               </div>
               <div className="flex">
-                <label className="label text-[#ffffff80]">
+                <label className="label w-1/2 justify-start text-[#ffffff80]">
                   <input
                     type="checkbox"
                     checked={rememberPassword}
