@@ -67,16 +67,16 @@ const InvestmentsTable = () => {
       <div className="dashboard-sidebar me-10">
         <Sidebar />
       </div>
-      <div className="me-5 w-[220px]">
+      <div className="me-5 w-[16%]">
         {/* <Sidebar /> */}
       </div>
-      <div className="IV ms-5">
+      <div className="IV ">
         <div className="header mt-4">
           <h1 className="font-Montserrat">Hello Parth!</h1>
-          <label className="input flex items-center gp-2 border-transparent bg-[#908c9366] rounded-3xl">
+          <label className="input flex items-center border-transparent bg-[#908c9366] rounded-3xl">
             <input 
               type="text" 
-              className="grow me-10" 
+              className="grow me-5" 
               placeholder="Search by company or CEO"
               value={searchQuery}
               onChange={handleSearchChange} 
@@ -109,8 +109,11 @@ const InvestmentsTable = () => {
         </div>
 
         </div>
+        <div className="head ms-5">
         <p className="welcome">Welcome Back!</p>
         <h2>Investments</h2>
+        </div>
+       
         
         <div className="table-container mt-10">
           <table>

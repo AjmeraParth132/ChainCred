@@ -6,7 +6,7 @@ const Header = () => {
     <>
       <div className="header mt-4">
         <h1 className="font-Montserrat">Hello Parth!</h1>
-        <label className="input flex items-center gp-2 border-transparent bg-[#908c9366] rounded-3xl">
+        {/* <label className="input flex items-center gp-2 border-transparent bg-[#908c9366] rounded-3xl">
           <input type="text" className="grow " placeholder="Search" />
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +20,7 @@ const Header = () => {
               clipRule="evenodd"
             />
           </svg>
-        </label>
+        </label> */}
       </div>
       <p className="welcome">Welcome Back!</p>
     </>
