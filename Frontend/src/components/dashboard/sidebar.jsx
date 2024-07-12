@@ -21,7 +21,8 @@ function Sidebar({ userType }) {
         <ul>
             <div className="upper-sidebar">
             <li><Link to="/"><Dashboard /> Dashboard</Link></li>
-          <li><Link to="/transactions"><AccountBalance /> Transactions</Link></li>
+            
+            {userType === 'company' && <li><Link to="/transactions"><AccountBalance /> Transactions</Link></li>}
           {userType === 'investor' &&
             <li><Link to="/investment"><CreditCard /> Investment</Link></li>
           }
