@@ -10,6 +10,7 @@ import FinanceStatementCompany from './components/dashboard/oneTimeInfoCompany'
 import InvestmentForm from './components/dashboard/oneTimeInfoInvestor'
 
 
+import Dashboard from './components/dashboard/dashboard'
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+
         <Route path="/reports" element={<Reports />} />
         <Route path="/investment" element={<InvestmentsTable />} />
         <Route path="/investment/:company" element= {<InvestmentDetails />} />

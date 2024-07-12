@@ -2,7 +2,7 @@ import React, { useEffect,useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Modal from "react-modal";
-import "./expenseModal.css";
+import styles from "./expenseModal.module.css";
 
 
 Modal.setAppElement("#root");
@@ -25,11 +25,9 @@ function Expense() {
     formData.append('expense_bucket', data.expense_bucket);
     formData.append('amount', data.amount);
     formData.append('remarks', data.remarks);
-    formData.append('date', data.date);
-    if (data.document[0] !== undefined)
-      formData.append('document_file', data.document[0]);
-    console.log(formData);
-    console.log(localStorage.getItem("User")[0]);
+    formData.append('document_file', data.document[0]);
+    formData.append('is_shared_with_investors', data.is_shared_with_investors);
+
     try {
       const response = await axios.post('http://127.0.0.1:8000/companies/company_expenses/', formData, {
         headers: {
@@ -85,13 +83,12 @@ function Expense() {
             </div>
             <div className="form-control">
               <label>Document File</label>
-              <input type="file" {...register("document")} className="text-black" />
+              <input type="file" {...register("document", { required: true })} className="text-black" />
               {errors.document && <span className="text-sm text-red-500">This field is required</span>}
             </div>
-            <div className="form-control">
-              <label>Date</label>
-              <input type="date" {...register("date")} className="banner-field text-black" />
-
+            <div className="form-control custom-checkbox">
+              <input type="checkbox" id="is_shared_with_investors" {...register("is_shared_with_investors")} />
+              <label htmlFor="is_shared_with_investors">Share with Investors</label>
             </div>
             <div className="modal-action">
               <button type="submit" className="btn save-btn">Upload</button>
