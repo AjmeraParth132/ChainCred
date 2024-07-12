@@ -61,15 +61,15 @@ const COLORS = [
 
 const Reports = () => {
   return (
-    <div className="reports-container me-4">
+    <div className="reports-container">
       
       <div className="dashboard-sidebar bg-slate-900">
         <Sidebar/>
       </div>
-      <div className="me-20 w-[25%]">
+      <div className="me-20 w-[350px]">
         {/* <Sidebar /> */}
       </div>
-      <div className="reports ms-2 ne-2">
+      <div className="reports ms-2">
         <div className="header">
         <h1 className="report-heading font-bold text-4xl mb-10">Reports</h1>
         <div className='profileIcon'>
@@ -77,13 +77,13 @@ const Reports = () => {
         </div>
        
         </div>
-        {/* <div className="tabs mb-10 ms-5">
+        <div className="tabs mb-10 ms-5">
           <div className="tab"><a href="">Balance Sheet</a></div>
           <div className="tab"><a href="">Profit & Loss</a></div>
           <div className="tab"><a href="">Spendings</a></div>
           <div className="tab"><a href="">KPI</a></div>
           <div className="tab"><a href="">Overview</a></div>
-        </div> */}
+        </div>
         
         <div className="content-container">
           <div className="spendings-chart">

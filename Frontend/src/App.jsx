@@ -6,7 +6,8 @@ import Login from './components/login'
 import Reports from './components/reports/reports'
 import InvestmentsTable from './components/investments/investmentTable'
 import InvestmentDetails from './components/investments/investmentDetails'
-import Dashboard from './components/dashboard/dashboard'
+
+
 
 function App() {
   return (
@@ -16,8 +17,6 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-
         <Route path="/reports" element={<Reports />} />
         <Route path="/investment" element={<InvestmentsTable />} />
         <Route path="/investment/:company" element= {<InvestmentDetails />} />

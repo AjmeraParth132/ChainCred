@@ -6,14 +6,12 @@ import loginImg from "../../public/login.png";
 import "../index.css";
 import "../../public/style/login.css";
 import Navbar from "./navbar";
-import { useNavigate } from "react-router-dom";
 
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [rememberPassword, setRememberPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [activeTab, setActiveTab] = useState("for-founder");
-  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -33,9 +31,9 @@ function Login() {
         password: data.password,
       });
       toast.success("Welcome to CredChain!");
-      localStorage.setItem("Users", JSON.stringify(res.data.user));
       setTimeout(() => {
-        navigate("/dashboard");
+        window.location.reload();
+        localStorage.setItem("Users", JSON.stringify(res.data.user));
       }, 1000);
     } catch (error) {
       toast.error("Invalid email or password!!", {
@@ -56,23 +54,23 @@ function Login() {
             <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
               <div className="founder mb-8">
                 <div
-                  className={`FI_box for-investors justify-center ${activeTab === "for-founder" ? "live" : ""}`}
+                  className={`toggle-box for-investors m-0 justify-center ${activeTab === "for-founder" ? "active" : ""}`}
                   onClick={() => toggleTab("for-founder")}
                 >
-                  <p className="text-4xl">For Founders</p>
+                  <h1>For Founders</h1>
                 </div>
                 <div
-                  className={`FI-box for-investors justify-center ${activeTab === "for-investors" ? "live" : ""}`}
+                  className={`toggle-box for-investors justify-center ${activeTab === "for-investors" ? "active" : ""}`}
                   onClick={() => toggleTab("for-investors")}
                 >
-                  <p className="text-4xl">For Investors</p>
+                  <h1>For Investors</h1>
                 </div>
               </div>
 
               <h1 className="text-white text-4xl font-Montserrat">Welcome to ChainCred!</h1>
               <div className="text-[#ffffff80] font-Montserrats">Log In to access your financial data in a few easy steps.</div>
 
-              <div className="form-control mt-6 w-[100%]">
+              <div className="form-control mt-6">
                 <input
                   type="text"
                   placeholder="Enter your username"
@@ -82,7 +80,7 @@ function Login() {
                 {errors.username && <span className="text-sm text-red-500">This field is required</span>}
               </div>
 
-              <div className="relative  w-[100%]">
+              <div className="relative mt-6 w-[534px]">
                 <input
                   className="px-3 py-2 login-pass border-none flex items-center text-white"
                   type={showPassword ? "text" : "password"}
@@ -107,11 +105,11 @@ function Login() {
                 {errors.password && <span className="text-sm text-red-500">This field is required</span>}
               </div>
 
-              <div className="form-control mt-6 w-[100%]">
+              <div className="form-control mt-6">
                 <button className="bg-[#FFE344] login-btn hover:bg-[#f2d846]">Login</button>
               </div>
               <div className="flex">
-                <label className="label w-1/2 justify-start text-[#ffffff80]">
+                <label className="label text-[#ffffff80]">
                   <input
                     type="checkbox"
                     checked={rememberPassword}

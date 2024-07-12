@@ -2,26 +2,22 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import signupImg from "../../public/signup.png"; // Replace with your image path
+import signupImg from "../../public/signup.png"; 
 import "../index.css";
-import "../../public/style/signup.css"; // Replace with your CSS path
+import "../../public/style/signup.css"; 
 import Navbar from "./navbar";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-  const [activeTab, setActiveTab] = useState("for-founder");
-  const navigate = useNavigate();
 
-  const toggleTab = (tab) => {
-    setActiveTab(tab);
-  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+
 
   const onSubmit = async (data) => {
     if (data.password !== data.confirmPassword) {
@@ -32,9 +28,9 @@ function Signup() {
       });
       return;
     }
-
     try {
-      let endpoint = activeTab === "for-founder" ? "/companies/signup/" : "/investors/signup/";
+      let endpoint = data.is_company ? "/companies/signup/" : "/investors/signup/";
+      // let user_type = data.is_company ? "company" : "investor";
       let payload = {
         user: {
           username: data.username,
@@ -42,23 +38,21 @@ function Signup() {
           password: data.password,
         }
       };
-
-      if (activeTab === "for-founder") {
+      if (data.is_company) {
         payload.company = {
           mobile_number: data.mobile_number,
           company_name: data.company,
         }
-      } else {
+      }
+      else {
         payload.investor = {
           mobile_number: data.mobile_number,
         }
       }
-
-      const res = await axios.post(`http://127.0.0.1:8000${endpoint}`, payload);
+        const res = await axios.post(`http://127.0.0.1:8000${endpoint}`, payload);
       toast.success("Account created successfully!");
       setTimeout(() => {
         window.location.reload();
-        navigate("/login");
       }, 1000);
     } catch (error) {
       toast.error("Error " + error.message, {
@@ -80,21 +74,6 @@ function Signup() {
           <div className="shrink-0">
             <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
 
-              <div className="founder mb-8">
-                <div
-                  className={`toggle-box for-investors justify-center ${activeTab === "for-founder" ? "live" : ""}`}
-                  onClick={() => toggleTab("for-founder")}
-                >
-                  <p className="text-4xl">For Founders</p>
-                </div>
-                <div
-                  className={`toggle-box for-investors justify-center ${activeTab === "for-investors" ? "live" : ""}`}
-                  onClick={() => toggleTab("for-investors")}
-                >
-                  <p className="text-4xl">For Investors</p>
-                </div>
-              </div>
-
               <h1 className="text-white text-4xl font-Montserrat">
                 Create Your Account
               </h1>
@@ -102,29 +81,29 @@ function Signup() {
                 Sign up to access exclusive features.
               </div>
 
-              <div className="form-control mt-4">
+              <div className="form-control mt-6">
                 <input
                   type="text"
                   placeholder="Username"
-                  className="signup-username px-3 py-2 border-none flex items-center text-white w-[90%]"
+                  className="signup-username px-3 py-2 border-none flex items-center text-white"
                   {...register("username", { required: true })}
                 />
                 {errors.username && <span className="text-sm text-red-500">This field is required</span>}
               </div>
 
-              <div className="form-control ">
+              <div className="form-control mt-6">
                 <input
                   type="email"
                   placeholder="Email address"
-                  className="signup-email px-3 py-2 border-none flex items-center text-white w-[90%]"
+                  className="signup-email px-3 py-2 border-none flex items-center text-white"
                   {...register("email", { required: true })}
                 />
                 {errors.email && <span className="text-sm text-red-500">This field is required</span>}
               </div>
 
-              <div className="relative ">
+              <div className="relative mt-6 w-[534px]">
                 <input
-                  className="px-3 py-2 signup-pass border-none flex items-center text-white w-[90%]"
+                  className="px-3 py-2 signup-pass border-none flex items-center text-white"
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
                   {...register("password", { required: true })}
@@ -157,9 +136,9 @@ function Signup() {
                 {errors.password && <span className="text-sm text-red-500">This field is required</span>}
               </div>
 
-              <div className="relative mt-4 ">
+              <div className="relative mt-6 w-[534px]">
                 <input
-                  className="px-3 py-2 signup-pass border-none flex items-center text-white w-[90%]"
+                  className="px-3 py-2 signup-pass border-none flex items-center text-white"
                   type={showPassword ? "text" : "password"}
                   placeholder="Confirm Password"
                   {...register("confirmPassword", { required: true })}
@@ -192,35 +171,46 @@ function Signup() {
                 {errors.confirmPassword && <span className="text-sm text-red-500">This field is required</span>}
               </div>
 
-              <div className="form-control mt-4">
+              <div className="form-control mt-6">
                 <input
                   type="text"
                   placeholder="Mobile Number"
-                  className="signup-mobile px-3 py-2 border-none flex items-center text-white w-[90%]"
+                  className="signup-mobile px-3 py-2 border-none flex items-center text-white"
                   {...register("mobile_number", { required: true })}
                 />
                 {errors.mobile_number && <span className="text-sm text-red-500">This field is required</span>}
               </div>
 
-              {activeTab === "for-founder" && (
-                <div className="form-control ">
+              <div className="form-control mt-6">
+                <label className="label text-[#ffffff80]">
+                  <input
+                    type="checkbox"
+                    {...register("is_company")}
+                    className="me-3 w-5 h-5 bg-[#2D3250]"
+                  />{" "}
+                  Is this a company account?
+                </label>
+              </div>
+
+              {isCompany && (
+                <div className="form-control mt-6">
                   <input
                     type="text"
                     placeholder="Company Name"
-                    className="signup-company px-3 py-2 border-none flex items-center text-white w-[90%]"
-                    {...register("company", { required: true })}
+                    className="signup-company px-3 py-2 border-none flex items-center text-white"
+                    {...register("company", { required: isCompany })}
                   />
                   {errors.company && <span className="text-sm text-red-500">This field is required</span>}
                 </div>
               )}
 
-              <div className="form-control mt-4">
+              <div className="form-control mt-6">
                 <button className="bg-[#FFE344] signup-btn hover:bg-[#f2d846]">
                   Sign Up
                 </button>
               </div>
 
-              <div className="flex mt-4">
+              <div className="flex mt-6">
                 <span className="text-[#ffffff80] font-Montserrat">
                   Already have an account?{" "}
                   <Link to={'/login'} className="font-Montserrat text-[#FFE344]">
@@ -228,7 +218,7 @@ function Signup() {
                   </Link>
                 </span>
               </div>
-            </form>
+              </form>
           </div>
         </div>
         <div className="order-1 w-full mt-[180px] md:w-1/2 relative">

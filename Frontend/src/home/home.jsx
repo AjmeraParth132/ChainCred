@@ -9,8 +9,9 @@ function Home() {
   return (
     <div>
       <Navbar />
-      <Login />
-
+      <div className='mt-[70px] mb-0'>
+      <Dashboard />
+      </div>
      
     </div>
   )

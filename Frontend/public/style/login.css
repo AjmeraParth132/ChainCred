@@ -1,8 +1,10 @@
 .login-email {
   border-radius: 0px 4px 4px 0px;
   border-left: 4px solid #ffe344;
+
   background: #2d3250;
-  height: 3rem;
+  width: 534px;
+  height: 48px;
   flex-shrink: 0;
 }
 
@@ -10,36 +12,46 @@
   border-radius: 0px 4px 4px 0px;
 
   background: #2d3250;
-  height: 3rem;
+  width: 534px;
+  height: 48px;
   flex-shrink: 0;
 }
 
 .login-btn {
-  height: 3rem;
+  width: 534px;
+  height: 48px;
   flex-shrink: 0;
   border-radius: 4px 4px 4px 4px;
-  font-family: Montserrat
 }
+
 
 .login-img img {
   display: block;
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 0 10px rgba(255, 227, 68, 0));
+  width: 100%; 
+  height: auto; 
+  filter: drop-shadow(
+    0 0 10px rgba(255, 227, 68, 0)
+  ); 
   transition: filter 0.3s ease;
 }
 
+
 .login-img:hover img {
-  filter: drop-shadow(0 0 20px rgba(255, 227, 68, 0.8));
+  filter: drop-shadow(
+    0 0 20px rgba(255, 227, 68, 0.8)
+  ); 
 }
 
 .founder {
   display: flex;
+  width: 534px;
+  height: 56px;
+  padding: 4px;
   align-items: center;
+  gap: 47px;
   flex-shrink: 0;
-  border-radius: 2px;
+  border-radius: 4px;
   background: #2d3250;
-  
 }
 
 /* .for-founder {
@@ -61,14 +73,20 @@
 } */
 
 .for-investors {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 2rem;
-  color: #fff;
-  font-family: Montserrat;
-  cursor: pointer;
-  padding-left: 1rem;
+    display: flex;
+    width: 258px;
+   
+    justify-content: center;
+    align-items: center;
+  
+    border-radius: 4px;
+   
+    color: #fff;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
 
 .img-text {
@@ -82,52 +100,58 @@
   width: 243px;
 }
 
-.FI_box {
-  cursor: pointer;
-  /* width: 90%; */
-  /* transition: all 0.2s ease-in; */
-}
 
-.live {
-  display: flex;
-  width: 50%;
-  height: 95%;
-  justify-content: center;
-  align-items: center;
-  gap: 12%;
-  flex-shrink: 0;
-  text-align: center;
-  border-radius: 4px;
-  background: #43456b;
-  color: #fff;
-  font-family: Montserrat;
-  /* line-height: normal; */
-}
 
-.relative {
-  position: relative;
-}
+.toggle-box {
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .toggle-box.active {
+    display: flex;
+    width: 258px;
+    padding: 10px 40px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    background: #43456b;
+    /* color: #fff; */
+    font-family: Montserrat, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
 
-input[type="password"],
-input[type="text"] {
-  width: 100%;
-  padding-right: 40px;
-}
-
-.password-toggle {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.password-toggle svg {
-  fill: #fffdfd;
-}
+  .relative {
+    position: relative;
+  }
+  
+  input[type="password"],
+  input[type="text"] {
+    width: 100%;
+    padding-right: 40px; 
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .password-toggle svg {
+    fill: #fffdfd; 
+  }
+  
+  

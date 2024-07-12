@@ -20,7 +20,7 @@ const data = {
 
 function Graph() {
   return (
-    <div className="graph w-[20%]">
+    <div className="graph">
       <Bar data={data} />
     </div>
   );

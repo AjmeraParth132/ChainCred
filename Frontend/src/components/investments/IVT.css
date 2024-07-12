@@ -16,7 +16,7 @@
 }
 
 table {
-  width: 80vw;
+  width: 1150px;
   border-collapse: collapse;
   margin-bottom: 20px;
   /* margin-left: 20px; */
@@ -44,7 +44,7 @@ tr:hover {
 
 .table-container {
   position: relative;
-  max-height: 70vh; 
+  max-height: 550px; 
   overflow-y: auto;
 }
 
@@ -54,9 +54,9 @@ tr:hover {
   position: sticky;
   top: 0;
   background-color: #273048;
-  z-index: 1; 
+  z-index: 1; /* Ensure the header is above the body rows */
   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4); 
-
+  /* border-radius: 4px; */
 
 }
 
@@ -73,6 +73,7 @@ tr:hover {
 
 .sort-options{
   background-color: transparent;
+  
 }
 
 
