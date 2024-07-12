@@ -1,14 +1,15 @@
 /* src/components/InvestmentsTable.module.css */
 .IV-content {
-  /* padding: 20px; */
-  /* background-color: #1c2431; */
+
   color: white;
   display: flex;
-  /* margin-left: 200px; */
+  width: 100%;
+  height: 100vh; 
+
 }
 
 .IV {
- 
+  flex: 1 1 90%; 
 }
 
 .table-container {
@@ -40,6 +41,7 @@ tr:hover {
 
 .sidebar{
   position: fixed;
+  flex: 1 1 20%; 
 }
 
 .table-container {

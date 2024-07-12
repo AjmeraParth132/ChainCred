@@ -45,7 +45,7 @@ const transactions = [
 
 const Transactions = () => {
   return (
-    <div className="transactions-container h-full">
+    <div className="transactions-container w-[100%]">
       <div className="transactions-header">
         <h2>Latest Transactions</h2>
         <a href="#" className="view-all">View all</a>

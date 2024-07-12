@@ -9,16 +9,13 @@ import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {
   return (
-    <div className={`${styles.dashboardContainer} justify-stretch`}>
-      <div className={`${styles.dashboardSidebar} me-10 justify-start`}>
+    <div className={styles.dashboardContainer}>
+      <div className={styles.dashboardSidebar}>
         <Sidebar />
       </div>
-      <div className="me-5 w-[16%]">
-        {/* <Sidebar /> */}
-      </div>
       <div className={styles.dashboardContent}>
+        <Header />
         <div className={styles.mainContent}>
-          <Header />
           <div className={styles.dashboardStats}>
             <div className={`${styles.stat} glass`}>
               <h3>Account Balance</h3>
@@ -37,7 +34,7 @@ const Dashboard = () => {
           <Transactions />
         </div>
       </div>
-      <div className={`${styles.amountTransfer} ms-10 justify-end`}>
+      <div className={styles.amountTransfer}>
         <AmountTransfer />
       </div>
     </div>
