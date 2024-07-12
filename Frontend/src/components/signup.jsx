@@ -13,7 +13,6 @@ function Signup() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const [activeTab, setActiveTab] = useState("for-founder");
-  const navigate = useNavigate();
 
   const toggleTab = (tab) => {
     setActiveTab(tab);
@@ -58,9 +57,9 @@ function Signup() {
       toast.success("Account created successfully!");
       setTimeout(() => {
         localStorage.setItem("User", JSON.stringify(res.data.company_id || res.data.investor_id));
-        const userType = data.is_company ? "company" : "investor";
+        const userType = activeTab === "for-founder" ? "company" : "investor";
         localStorage.setItem("UserType", userType);
-        if (data.is_company) {
+        if (activeTab === "for-founder") {
           // localStorage.setItem("Company", JSON.stringify(res.data.company_id));
           window.location.href = "/company-form";
         }
@@ -68,8 +67,6 @@ function Signup() {
           // localStorage.setItem("Investor", JSON.stringify(res.data.investor_id));
           window.location.href = "/investor-form";
         }
-        window.location.reload();
-        navigate("/login");
       }, 1000);
     } catch (error) {
       toast.error("Error " + error.message, {
@@ -79,8 +76,6 @@ function Signup() {
       });
     }
   };
-
-  const isCompany = watch("is_company");
 
   return (
     <>

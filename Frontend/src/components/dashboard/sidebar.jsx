@@ -5,7 +5,7 @@ import './sidebar.css';
 import logo from '../../../public/logo.png';
 import Expense from './expenseModal';
 
-function Sidebar() {
+function Sidebar({userType }) {
   return (
     <div className='sidebar'>
       <div className="sidebar-logo">

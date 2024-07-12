@@ -49,7 +49,7 @@ function FinanceStatementCompany() {
 
       if (response.status === 201) {
         console.log('Expense created successfully');
-        window.location.href = "/";
+        window.location.href = "/dashboard";
         // history.push("/");
       } else {
         console.error('Failed to create expense');

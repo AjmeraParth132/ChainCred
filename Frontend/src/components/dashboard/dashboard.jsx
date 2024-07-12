@@ -8,7 +8,7 @@ import AmountTransfer from "./amountTransfer";
 import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {
-  const userType = localStorage.getItem("UserType");
+  let userType = localStorage.getItem("UserType");
   return (
     <div className={styles.dashboardContainer}>
       <div className={styles.dashboardSidebar}>
