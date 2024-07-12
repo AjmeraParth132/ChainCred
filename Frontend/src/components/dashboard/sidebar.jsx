@@ -5,7 +5,7 @@ import './sidebar.css';
 import logo from '../../../public/logo.png'
 
 
-function Sidebar() {
+function Sidebar({ userType }) {
   return (
     <div className=''>
     <div className="sidebar p-8">
@@ -22,10 +22,10 @@ function Sidebar() {
             <div className="upper-sidebar">
             <li><Link to="/"><Dashboard /> Dashboard</Link></li>
           <li><Link to="/transactions"><AccountBalance /> Transactions</Link></li>
-          <li><Link to="/cards"><CreditCard /> Cards</Link></li>
-          <li><Link to="/investment"><CreditCard /> Investment</Link></li>
-          <li><Link to="/reports"><Receipt /> Reports</Link></li>
-          <li><Link to="/bank-accounts"><AccountBalance /> Bank Accounts</Link></li>
+          {userType === 'investor' &&
+            <li><Link to="/investment"><CreditCard /> Investment</Link></li>
+          }
+          {userType === 'company' && <li><Link to="/reports"><Receipt /> Reports</Link></li>}
           <li><Link to="/notifications"><Notifications /> Notifications</Link></li>
             </div>
          <div className="lower-sidebar mt-10">

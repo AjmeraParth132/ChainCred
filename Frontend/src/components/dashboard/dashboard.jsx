@@ -9,11 +9,12 @@ import AmountTransfer from "./amountTransfer";
 import "./dashboard.css"; // You can use this file for styling
 
 const Dashboard = () => {
+  const userType = localStorage.getItem("UserType");
   return (
     <div className="dashboard-container justify-stretch">
       
       <div className="dashboard-sidebar me-10 justify-start ">
-        <Sidebar />
+        <Sidebar userType={userType}/>
       </div>
       <div className="me-5 w-[220px]">
         {/* <Sidebar /> */}

@@ -53,6 +53,8 @@ function Signup() {
       toast.success("Account created successfully!");
       setTimeout(() => {
         localStorage.setItem("User", JSON.stringify(res.data.company_id || res.data.investor_id));
+        const userType = data.is_company ? "company" : "investor";
+        localStorage.setItem("UserType", userType);
         if (data.is_company) {
           // localStorage.setItem("Company", JSON.stringify(res.data.company_id));
           window.location.href = "/company-form";

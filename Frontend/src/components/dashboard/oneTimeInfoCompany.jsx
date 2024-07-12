@@ -49,9 +49,8 @@ function FinanceStatementCompany() {
 
       if (response.status === 201) {
         console.log('Expense created successfully');
-
+        window.location.href = "/";
         // history.push("/");
-        window.location.href = '/';
       } else {
         console.error('Failed to create expense');
       }

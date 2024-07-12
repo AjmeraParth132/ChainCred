@@ -6,8 +6,10 @@ import loginImg from "../../public/login.png";
 import "../index.css";
 import "../../public/style/login.css";
 import Navbar from "./navbar";
+import {useNavigate} from 'react-router-dom';
 
 function Login() {
+  const navigate = userNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [rememberPassword, setRememberPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -34,7 +36,9 @@ function Login() {
       // console.log(res.data);
       setTimeout(() => {
         window.location.reload();
+        const userType = activeTab === "for-founder" ? "company" : "investor";
         localStorage.setItem("User", JSON.stringify(res.data.company_id || res.data.investor_id));
+        localStorage.setItem("UserType", userType);
 
       }, 1000);
     } catch (error) {
