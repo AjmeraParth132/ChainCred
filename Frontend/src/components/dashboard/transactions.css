@@ -204,3 +204,8 @@ background: rgba(251, 244, 63, 0.35);
   background-color: #4a49c7;
 }
 
+.row-transaction{
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
