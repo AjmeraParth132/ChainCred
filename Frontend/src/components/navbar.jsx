@@ -42,31 +42,31 @@ function Navbar() {
 
   const navItem = (
     <>
-      <li className="rounded-md hover:bg-slate-100 duration-300 cursor-pointer dark:hover:bg-slate-800">
+      <li className="rounded-md text-white hover:bg-slate-800 duration-300 cursor-pointer ">
         <a href="/"> Home </a>
       </li>
-      <li className=" rounded-md hover:bg-slate-100 duration-300 cursor-pointer dark:hover:bg-slate-800 ">
+      <li className=" rounded-md text-white hover:bg-slate-800 duration-300 cursor-pointer ">
         <a> Features </a>
       </li>
 
-      <li className=" rounded-md hover:bg-slate-100 duration-300 cursor-pointer dark:hover:bg-slate-800">
+      <li className=" rounded-md text-white hover:bg-slate-800 duration-300 cursor-pointer">
         <a> Pricing </a>
       </li>
 
-      <li className="rounded-md hover:bg-slate-100 duration-300 cursor-pointer dark:hover:bg-slate-800">
+      <li className="rounded-md text-white hover:bg-slate-800 duration-300 cursor-pointer ">
         <a> About Us </a>
       </li>
 
-      <li className="rounded-md hover:bg-slate-100 duration-300 cursor-pointer dark:hover:bg-slate-800">
+      <li className="rounded-md text-white hover:bg-slate-800 duration-300 cursor-pointer ">
         <a> Contact </a>
       </li>
     </>
   );
   return (
     <>
-   <div className={`navbar nav  text-[#FFFFFF] fixed top-0 left-0 right-0 z-50 ${
+   <div className={`navbar nav  fixed top-0 left-0 right-0 z-50 ${
          sticky
-        ? "sticky-navbar shadow-md  dark:bg-slate-700 dark:text-white duration-300 transition-all ease-in-out bg-cyan-100"
+        ? "sticky-navbar shadow-md"
             : ""
         }`}>
   <div className="navbar-start">
@@ -103,7 +103,7 @@ function Navbar() {
   </div>
   <div className="navbar-end mx-5">
   
-  <a href="/signup" className="bg-[#FFE344] text-black px-3 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer dark:bg-[#FFE344] ">
+  <a href="/signup" className="bg-[#FFE344] text-black px-3 py-2 rounded-md hover:bg-[#f0d22c] duration-300 cursor-pointer dark:bg-[#FFE344] ">
                 Get Started
               </a>
   </div>
