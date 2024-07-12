@@ -74,11 +74,11 @@ function Login() {
               <h1 className="text-white text-4xl font-Montserrat">Welcome to ChainCred!</h1>
               <div className="text-[#ffffff80] font-Montserrats">Log In to access your financial data in a few easy steps.</div>
 
-              <div className="form-control mt-6 w-[100%]">
+              <div className="form-control mt-6 w-[100%] border-none">
                 <input
                   type="text"
                   placeholder="Enter your username"
-                  className="login-email px-3 py-2  border-none flex items-center text-white"
+                  className="login-username px-3 py-2  border-none flex items-center text-white"
                   {...register("username", { required: true })}
                 />
                 {errors.username && <span className="text-sm text-red-500">This field is required</span>}
