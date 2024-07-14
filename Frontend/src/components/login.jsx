@@ -9,11 +9,11 @@ import Navbar from "./navbar";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [rememberPassword, setRememberPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [activeTab, setActiveTab] = useState("for-founder");
-  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -35,8 +35,9 @@ function Login() {
       toast.success("Welcome to CredChain!");
       // console.log(res.data);
       setTimeout(() => {
-        window.location.reload();
+        const userType = activeTab === "for-founder" ? "company" : "investor";
         localStorage.setItem("User", JSON.stringify(res.data.company_id || res.data.investor_id));
+        localStorage.setItem("UserType", userType);
         navigate("/dashboard");
 
       }, 1000);

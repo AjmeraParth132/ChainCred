@@ -44,8 +44,7 @@ function InvestmentForm() {
 
       if (response.status === 200) {
         console.log('Investments Added successfully');
-        reset();
-        window.location.href = '/';
+        window.location.href = "/dashboard";
         
       } else {
         console.error('Failed to create expense');

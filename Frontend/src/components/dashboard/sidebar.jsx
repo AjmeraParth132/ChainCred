@@ -5,7 +5,7 @@ import './sidebar.css';
 import logo from '../../../public/logo.png';
 import Expense from './expenseModal';
 
-function Sidebar() {
+function Sidebar({userType }) {
   return (
     <div className='sidebar'>
       <div className="sidebar-logo">
@@ -19,19 +19,20 @@ function Sidebar() {
         <ul>
           <div className="upper-sidebar">
           <button className="add-expense-button" onClick={() => document.getElementById("my_modal_1").showModal()}>+ Add Expense</button>
-          <Expense />
-            <li><Link to="/dashboard"><Dashboard /> Dashboard</Link></li>
-            <li><Link to="/transactions"><AccountBalance /> Transactions</Link></li>
-            <li><Link to="/cards"><CreditCard /> Cards</Link></li>
+            <li><Link to="/"><Dashboard /> Dashboard</Link></li>
+            
+            {userType === 'company' && <li><Link to="/transactions"><AccountBalance /> Transactions</Link></li>}
+          {userType === 'investor' &&
             <li><Link to="/investment"><CreditCard /> Investment</Link></li>
-            <li><Link to="/reports"><Receipt /> Reports</Link></li>
-            <li><Link to="/bank-accounts"><AccountBalance /> Bank Accounts</Link></li>
-            <li><Link to="/notifications"><Notifications /> Notifications</Link></li>
-          </div>
-          <div className="lower-sidebar">
-            <li><Link to="/settings"><Settings /> Settings</Link></li>
-            <li><Link to="/"><ExitToApp /> Log out</Link></li>
-          </div>
+          }
+          {userType === 'company' && <li><Link to="/reports"><Receipt /> Reports</Link></li>}
+          <li><Link to="/notifications"><Notifications /> Notifications</Link></li>
+            </div>
+         <div className="lower-sidebar mt-10">
+         <li><Link to="/settings"><Settings /> Settings</Link></li>
+         <li><Link to="/logout"><ExitToApp /> Log out</Link></li>
+         </div>
+          
         </ul>
       </nav>
     </div>
