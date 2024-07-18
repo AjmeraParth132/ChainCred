@@ -19,7 +19,7 @@ function Sidebar({userType }) {
         <ul>
           <div className="upper-sidebar">
           <button className="add-expense-button" onClick={() => document.getElementById("my_modal_1").showModal()}>+ Add Expense</button>
-            <li><Link to="/"><Dashboard /> Dashboard</Link></li>
+            <li><Link to="/dashboard"><Dashboard /> Dashboard</Link></li>
             
             {userType === 'company' && <li><Link to="/transactions"><AccountBalance /> Transactions</Link></li>}
           {userType === 'investor' &&
@@ -30,7 +30,7 @@ function Sidebar({userType }) {
             </div>
          <div className="lower-sidebar mt-10">
          <li><Link to="/settings"><Settings /> Settings</Link></li>
-         <li><Link to="/logout"><ExitToApp /> Log out</Link></li>
+         <li><Link to="/login"><ExitToApp /> Log out</Link></li>
          </div>
           
         </ul>

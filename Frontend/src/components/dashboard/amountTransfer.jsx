@@ -10,7 +10,7 @@ const AmountTransfer = () => {
         <div className={styles.avatar} />
         <div>
           <div className={styles.name}>Parth Ajmera</div>
-          <div className={styles.email}>partha@mail.com</div>
+          <div className={styles.email}>parth.ajmera@chaincred.com</div>
         </div>
       </div>
       <div className={styles.cardContainer}>
