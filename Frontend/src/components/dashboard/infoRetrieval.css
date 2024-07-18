@@ -1,0 +1,21 @@
+.info-page-body {
+  height: 100vh;
+  display: flex;
+  font-family: 'montserrat', sans-serif;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 600;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color:white
+}
+
+.info-page-body a {
+  color:#FFE344;
+}
+
+.info-page-body a:hover{
+    text-decoration: solid;
+    color:aqua
+}

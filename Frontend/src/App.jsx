@@ -8,6 +8,7 @@ import InvestmentsTable from './components/investments/investmentTable'
 import InvestmentDetails from './components/investments/investmentDetails'
 import FinanceStatementCompany from './components/dashboard/oneTimeInfoCompany'
 import InvestmentForm from './components/dashboard/oneTimeInfoInvestor'
+import InfoRetrieval from './components/dashboard/infoRetrieval'
 
 
 import Dashboard from './components/dashboard/dashboard'
@@ -23,7 +24,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
-
+        <Route path='/info' element={<InfoRetrieval />} />
         <Route path="/reports" element={<Reports />} />
         <Route path="/investment" element={<InvestmentsTable />} />
         <Route path="/investment/:company" element= {<InvestmentDetails />} />

@@ -60,6 +60,22 @@
   border-radius: 5px;
 }
 
+.sidebar button{
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  transition: background 0.3s, color 0.3s;
+}
+.sidebar button:hover{
+  color: #7e57c2;
+  display: flex;
+  width: 100%;
+  background: rgba(126, 87, 194, 0.1);
+  border-radius: 5px;
+}
+
 .sidebar nav ul li a svg {
   margin-right: 10px;
 }

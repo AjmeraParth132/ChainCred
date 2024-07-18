@@ -1,11 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { Dashboard, AccountBalance, CreditCard, Receipt, Notifications, Settings, ExitToApp } from '@mui/icons-material';
 import './sidebar.css';
 import logo from '../../../public/logo.png';
 import Expense from './expenseModal';
 
-function Sidebar({userType }) {
+function Sidebar({ userType }) {
+  const navigate = useNavigate();
+  const handleLogout = async() => { 
+    localStorage.clear();
+    const logoutEndpoint = userType === 'company' ? '/companies/logout/' : '/investors/logout/';
+    try {
+      await fetch(`http://127.0.0.1:8000${logoutEndpoint}`, { method: 'POST' });
+      navigate('/login');
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }
+  
   return (
     <div className='sidebar'>
       <div className="sidebar-logo">
@@ -30,7 +43,7 @@ function Sidebar({userType }) {
             </div>
          <div className="lower-sidebar mt-10">
          <li><Link to="/settings"><Settings /> Settings</Link></li>
-         <li><Link to="/login"><ExitToApp /> Log out</Link></li>
+         <li><button onClick={handleLogout}><ExitToApp /> Log out</button></li>
          </div>
           
         </ul>
