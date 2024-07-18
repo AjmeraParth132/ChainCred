@@ -1,0 +1,174 @@
+/* Reports.css */
+
+.reports-container {
+    /* padding: 20px; */
+    color: #ffffff;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .tabs {
+    display: flex;
+    /* gap: 10px; */
+    margin-bottom: 20px;
+    /* border: 2px solid ; */
+    border-color: #ffffff;
+    width: fit-content;
+  }
+  
+  .tab {
+   
+    display: flex;
+    /* width: 108px; */
+    /* padding: 10px; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* gap: 10px; */
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+border-right: 1px solid rgba(255, 255, 255, 0.14);
+border-left: 1px solid rgba(255, 255, 255, 0.14);
+border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .tabs :hover{
+    background-color: #32324a;
+  }
+  
+  .tab.active {
+    background-color: #32324a;
+  }
+
+  .report-heading{
+    color: #FFF;
+/* font-family: Montserrat; */
+
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+  }
+  
+  .content-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .spendings-chart, .runway, .total-asset-balance, .outflow-chart {
+    border-radius: 4px;
+background: #D0E3FF;
+    padding: 20px;
+    color: #0A2472;
+font-family: Montserrat;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+
+  }
+
+  .inflow-outflow-profit{
+    background-color: #D0E3FF;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    border-radius: 4px;
+    color: #0A2472;
+font-family: Montserrat;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+  }
+  
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .color-box {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+  }
+  
+  .runway {
+    grid-column: span 1;
+    text-align: center;
+  }
+  
+  .runway-text {
+    font-size: 2rem;
+    margin: 10px 0;
+  }
+  
+  .inflow-outflow-profit {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .inflow, .outflow, .profit {
+    text-align: center;
+  }
+  
+  .total-asset-balance {
+    grid-column: span 2;
+  }
+  
+  .total-asset-balance .previous-week {
+    display: inline-flex;
+    padding: 8px 10px;
+    
+    gap: 10px;
+    border-radius: 4px;
+    background: #97A5DD;
+  }
+  
+  .TAB{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  /* .previous-week{
+    display: inline-flex;
+padding: 8px 10px;
+
+gap: 10px;
+border-radius: 4px;
+background: #97A5DD;
+  } */
+
+  .dashboard-sidebar {
+    position: fixed;
+   
+  }
+
+  .profileIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #4a5b8d;
+    color: white;
+    font-size: 20px;
+    border-radius: 50%;
+  }
+
+  .header{
+    display: flex;
+    margin: 20px;
+    cursor: pointer;
+  }

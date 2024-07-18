@@ -1,0 +1,211 @@
+/* .transactions {
+  background-color: #2a3b55;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  width: 840px;
+
+flex-shrink: 0;
+background: #250877;
+color: white;
+}
+
+.transactions h3 {
+  margin: 0 0 20px;
+}
+
+.transactions ul {
+  list-style: none;
+  padding: 0;
+}
+
+.transactions ul li {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.transactions ul li .success {
+  color: #4caf50;
+  display: flex;
+  padding: 4px 15px 4px 14px;
+  align-items: center;
+  gap: 4px;
+  align-self: stretch;
+  border-radius: 27px;
+background: rgba(29, 232, 232, 0.35);
+}
+
+.transactions ul li .failed {
+  color: #f44336;
+  display: flex;
+  padding: 4px 15px 4px 14px;
+  align-items: center;
+  gap: 4px;
+  align-self: stretch;
+  border-radius: 27px;
+background: rgba(210, 18, 133, 0.35);
+}
+
+.transactions ul li .pending {
+  color: #ff9800;
+  display: flex;
+  padding: 4px 15px 4px 14px;
+  align-items: center;
+  gap: 4px;
+  align-self: stretch;
+  border-radius: 27px;
+background: rgba(251, 244, 63, 0.35);
+}
+
+.add-expense {
+  background-color: #7e57c2;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-expense:hover {
+  background-color: #5e35b1;
+}
+
+#status{
+  display: flex;
+  width: 78px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+} */
+
+
+/* Transactions.css */
+
+
+.transactions-container {
+  background: #250877;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  /* width: 840px; */
+}
+
+.transactions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.transactions-header h2 {
+  margin: 0;
+}
+
+.view-all {
+  color: #aaa;
+  text-decoration: none;
+}
+
+.transactions-list {
+  margin-bottom: 20px;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #2e3a58;
+  justify-items: flex-start;
+}
+
+.transaction-details {
+  display: flex;
+  align-items: center;
+}
+
+.transaction-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #5a5a5a;
+  margin-right: 10px;
+}
+
+.transaction-name {
+  font-size: 16px;
+}
+
+.transaction-date, .transaction-time, .transaction-amount, .transaction-status {
+  font-size: 14px;
+}
+
+.transaction-amount.positive {
+  color: green;
+}
+
+.transaction-amount.negative {
+  color: red;
+}
+
+.transaction-status {
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.transaction-status.success {
+  color: #4caf50;
+  display: flex;
+  padding: 4px 15px 4px 14px;
+  align-items: center;
+  gap: 4px;
+  align-self: stretch;
+  border-radius: 27px;
+background: rgba(29, 232, 232, 0.35);
+}
+
+.transaction-status.failed {
+  color: #f44336;
+  display: flex;
+  padding: 4px 22px 4px 22px;
+  align-items: center;
+  gap: 4px;
+  align-self: stretch;
+  border-radius: 27px;
+background: rgba(210, 18, 133, 0.35);
+}
+
+.transaction-status.pending {
+  color: #ff9800;
+  display: flex;
+  padding: 4px 15px 4px 14px;
+  align-items: center;
+  gap: 4px;
+  align-self: stretch;
+  border-radius: 27px;
+background: rgba(251, 244, 63, 0.35);
+}
+
+.add-expense-button {
+  padding: 10px 20px;
+  background-color: #665ef0;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.add-expense-button:hover {
+  background-color: #4a49c7;
+}
+
+.row-transaction{
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
