@@ -26,28 +26,32 @@ function Login() {
   const handleRememberPasswordChange = (e) => setRememberPassword(e.target.checked);
 
   const onSubmit = async (data) => {
-    try {
-      const endpoint = activeTab === "for-founder" ? "/companies/login/" : "/investors/login/";
-      const res = await axios.post(`http://127.0.0.1:8000${endpoint}`, {
-        username: data.username,
-        password: data.password,
-      });
-      toast.success("Welcome to CredChain!");
-      // console.log(res.data);
-      setTimeout(() => {
-        const userType = activeTab === "for-founder" ? "company" : "investor";
-        localStorage.setItem("User", JSON.stringify(res.data.company_id || res.data.investor_id));
+    const userType = activeTab === "for-founder" ? "company" : "investor";
+        // localStorage.setItem("User", JSON.stringify(res.data.company_id || res.data.investor_id));
         localStorage.setItem("UserType", userType);
         navigate("/dashboard");
+    // try {
+    //   const endpoint = activeTab === "for-founder" ? "/companies/login/" : "/investors/login/";
+    //   const res = await axios.post(`http://127.0.0.1:8000${endpoint}`, {
+    //     username: data.username,
+    //     password: data.password,
+    //   });
+    //   toast.success("Welcome to CredChain!");
+    //   // console.log(res.data);
+    //   setTimeout(() => {
+    //     const userType = activeTab === "for-founder" ? "company" : "investor";
+    //     localStorage.setItem("User", JSON.stringify(res.data.company_id || res.data.investor_id));
+    //     localStorage.setItem("UserType", userType);
+    //     navigate("/dashboard");
 
-      }, 1000);
-    } catch (error) {
-      toast.error("Invalid email or password!!", {
-        style: {
-          backgroundColor: '#FFE344'
-        }
-      });
-    }
+    //   }, 1000);
+    // } catch (error) {
+    //   toast.error("Invalid email or password!!", {
+    //     style: {
+    //       backgroundColor: '#FFE344'
+    //     }
+    //   });
+    // }
   };
 
   return (
