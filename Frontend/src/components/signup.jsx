@@ -59,14 +59,15 @@ function Signup() {
         localStorage.setItem("User", JSON.stringify(res.data.company_id || res.data.investor_id));
         const userType = activeTab === "for-founder" ? "company" : "investor";
         localStorage.setItem("UserType", userType);
-        if (activeTab === "for-founder") {
-          // localStorage.setItem("Company", JSON.stringify(res.data.company_id));
-          window.location.href = "/company-form";
-        }
-        else {
-          // localStorage.setItem("Investor", JSON.stringify(res.data.investor_id));
-          window.location.href = "/investor-form";
-        }
+        // if (activeTab === "for-founder") {
+        //   // localStorage.setItem("Company", JSON.stringify(res.data.company_id));
+        //   window.location.href = "/company-form";
+        // }
+        // else {
+        //   // localStorage.setItem("Investor", JSON.stringify(res.data.investor_id));
+        //   window.location.href = "/investor-form";
+        // }
+        window.location.href = "/info";
       }, 1000);
     } catch (error) {
       toast.error("Error " + error.message, {
