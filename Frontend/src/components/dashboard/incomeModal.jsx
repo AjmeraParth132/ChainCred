@@ -26,8 +26,9 @@ function Income() {
     formData.append('amount', data.amount);
     formData.append('remarks', data.remarks);
     formData.append('date', data.date);
+    // console.log(formData.);
     console.log(formData);
-    console.log(localStorage.getItem("User")[0]);
+    // console.log(localStorage.getItem("User")[0]);
     try {
       const response = await axios.post('http://127.0.0.1:8000/companies/income/', formData, {
         headers: {
@@ -38,7 +39,7 @@ function Income() {
       
 
       if (response.status === 201) {
-        console.log('Expense created successfully');
+        console.log('Income created successfully');
         document.getElementById("my_modal_2").close();
         reset();
       } else {

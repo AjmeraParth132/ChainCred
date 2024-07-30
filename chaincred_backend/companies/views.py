@@ -127,7 +127,7 @@ class ExpenseDistributionAPIView(APIView):
     Methods:
         get: Gets the distribution of company expenses.
     """
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     
     def get(self, request, company_id, *args, **kwargs):
         try:
@@ -176,7 +176,13 @@ class FinanceStatementAPI(APIView):
         return Response({'message': 'Finance statement saved successfully'}, status=status.HTTP_201_CREATED)
 
 class CompanyIncomeAPIView(APIView):
+    def get(self,request,company_id):
+        company = Company.objects.get(company_id=company_id)
+        incomes = company.get_income_distribution()
+        return Response(incomes, status=status.HTTP_200_OK)
+    
     def post(self,request):
+        # print(request.data)
         company_id = request.data.get('company_id')
         income_data = {
             'company_id': company_id,
@@ -191,3 +197,22 @@ class CompanyIncomeAPIView(APIView):
             income_serializer.save()
             return Response(income_serializer.data, status=status.HTTP_201_CREATED)
         return Response(income_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class CompanyView(APIView):
+    def get(self,request,company_id):
+        try:
+            # company_id = request.data.get('company_id')
+            # print(company_id)
+            # print(request.data)
+            company = Company.objects.get(company_id=company_id)
+            serializer = CompanySerializer(company)
+            user = serializer.data['user']
+            user = User.objects.get(id=user)
+            # return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response({
+                'company': serializer.data,
+                'username': user.username,
+                'email': user.email
+            }, status=status.HTTP_200_OK)
+        except Company.DoesNotExist:
+            return Response({'error': 'Company not found'}, status=status.HTTP_404_NOT_FOUND)

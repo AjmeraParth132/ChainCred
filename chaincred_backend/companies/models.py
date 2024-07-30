@@ -40,27 +40,49 @@ class Company(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
+    def get_income_distribution(self):
+        incomes = CompanyIncome.objects.filter(company_id=self.company_id)
+        income_distribution = []
+        for income in incomes:
+            income_data = {
+                'income_type': income.income_type,
+                'amount': income.amount,
+                'date': income.date,
+            }
+            income_distribution.append(income_data)
+        return income_distribution
+    
     def get_expense_distribution(self):
-        
         expenses = CompanyExpense.objects.filter(company_id=self.company_id)
         
-        categoriesed_expenses = {}
+        categorized_expenses = {}
         for expense in expenses:
             bucket = expense.expense_bucket
             amount = expense.amount
-            if bucket in categoriesed_expenses:
-                categoriesed_expenses[bucket] += amount
+            if bucket in categorized_expenses:
+                categorized_expenses[bucket] += amount
             else:
-                categoriesed_expenses[bucket] = amount
+                categorized_expenses[bucket] = amount
         
-        total_expenses = sum(categoriesed_expenses.values())
-        percentage_distribution = {category : float((amount/total_expenses)*100) for category, amount in categoriesed_expenses.items()}
+        total_expenses = sum(categorized_expenses.values())
+        percentage_distribution = {category: (float((amount / total_expenses) * 100), amount) for category, amount in categorized_expenses.items()}
         
         threshold = 1
-        for category, percentage in percentage_distribution.items():
+        others_percentage = 0
+        others_value = 0
+        categories_to_remove = []
+        
+        for category, (percentage, value) in percentage_distribution.items():
             if percentage < threshold:
-                percentage_distribution['Others'] = percentage_distribution.get('Others', 0) + percentage
-                del percentage_distribution[category]
+                others_percentage += percentage
+                others_value += value
+                categories_to_remove.append(category)
+        
+        for category in categories_to_remove:
+            del percentage_distribution[category]
+        
+        if others_percentage > 0:
+            percentage_distribution['Others'] = (others_percentage, others_value)
         
         return percentage_distribution
     

@@ -34,6 +34,8 @@ class SignupView(APIView):
             email=user_data.get('email'),
             password=user_data.get('password')
         )
+        # print(user_data)
+        # print(investor_data)
         investor_data['user'] = user.id
         investor_serializer = InvestorSerializer(data=investor_data)
         # print(user_data, investor_data)
@@ -42,7 +44,9 @@ class SignupView(APIView):
             investor = investor_serializer.save(user=user)
             # token = Token.objects.create(user=user)
             return Response({'investor_id': investor.investor_id}, status=status.HTTP_201_CREATED)
-        return Response(investor_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            user.delete()
+            return Response(investor_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class LoginView(APIView):
     """
@@ -142,3 +146,11 @@ class FirstTimeInvestmentsView(APIView):
                 valuation=valuation
             )
         return Response({'message': 'Investments added successfully'}, status=status.HTTP_200_OK)
+
+class getInvestorView(APIView):
+    def get(self,request,investor_id):
+        investor = get_object_or_404(Investor, investor_id=investor_id)
+        # serializer = InvestorSerializer(investor)
+        user = investor.user
+        return Response({'username': user.username, 'email': user.email}, status=status.HTTP_200_OK)
+        # return Response(InvestorSerializer(investor).data, status=status.HTTP_200_OK)

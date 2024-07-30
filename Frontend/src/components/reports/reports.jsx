@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import {
   PieChart,
   Pie,
@@ -13,6 +13,7 @@ import {
   Legend,
 } from "recharts";
 import "./reports.css";
+import axios from "axios";
 import Runway from "./runway";
 import Inflow from "./inflow";
 import Outflow from "./outflow";
@@ -60,6 +61,47 @@ const COLORS = [
 ];
 
 const Reports = () => {
+  const [expenseDistribution, setExpenseDistribution] = useState([]);
+  const [totalExpense, setTotalExpense] = useState(0);
+  useEffect(() => { 
+    const user = localStorage.getItem("User");
+    const extract_distribution = async () => {
+      try {
+        const res = await axios.get(`http://127.0.0.1:8000/companies/expense-distribution/${user}/`);
+        const distribution = res.data;
+        const formattedData = Object.keys(distribution).map((key) => ({
+          name: key,
+          percentage: distribution[key][0],
+          value: distribution[key][1],
+        }));
+        setExpenseDistribution(formattedData);
+        setTotalExpense(formattedData.reduce((acc, item) => acc + item.value, 0));
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    const extract_income = async () => {
+      try {
+        const res = await axios.get(`http://127.0.0.1:8000/companies/income/${user}/`);
+        const income_distribution = res.data;
+        // console.log(income_distribution);
+        const formattedData = Object.keys(income_distribution).map((key) => ({
+          name: key,
+          amount: income_distribution['amount'],
+          date: income_distribution['date'],
+          income_type: income_distribution['income_type'],
+        }));
+        // const formattedData = Object.keys(income_distribution).map((key) => ({
+        //   name: key,
+        //   amount: income_distribution[key],
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+    extract_distribution();
+    extract_income();
+  }, []);
   return (
     <div className="reports-container me-4">
       
@@ -91,7 +133,7 @@ const Reports = () => {
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
-                  data={dataPie1}
+                  data={expenseDistribution}
                   cx="50%"
                   cy="50%"
                   innerRadius={80}
@@ -100,7 +142,7 @@ const Reports = () => {
                   paddingAngle={2}
                   dataKey="value"
                 >
-                  {dataPie1.map((entry, index) => (
+                  {expenseDistribution.map((entry, index) => (
                     <Cell
                       key={`cell-${index}`}
                       fill={COLORS[index % COLORS.length]}
@@ -111,7 +153,7 @@ const Reports = () => {
               </PieChart>
             </ResponsiveContainer>
             <div className="legend">
-              {dataPie1.map((entry, index) => (
+              {expenseDistribution.map((entry, index) => (
                 <div key={`legend-${index}`} className="legend-item">
                   <div
                     className="color-box"
@@ -130,7 +172,7 @@ const Reports = () => {
               <Inflow />
             </div>
             <div className="outflow ">
-              <Outflow />
+              <Outflow totalExpense={totalExpense} />
             </div>
             <div className="profit">
               <Profit />

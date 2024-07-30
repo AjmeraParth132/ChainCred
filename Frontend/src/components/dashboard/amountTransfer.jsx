@@ -1,22 +1,51 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard, faUniversity, faWallet, faPiggyBank } from '@fortawesome/free-solid-svg-icons';
 import styles from './amountTransfer.module.css';
+import toast from 'react-hot-toast';
+import axios from 'axios';
+import { PlayForWork } from '@mui/icons-material';
 
 const AmountTransfer = () => {
+  const [name, setName] = useState("Parth Ajmera");
+  const [email, setEmail] = useState("parth.ajmera@chaincred.com");
+  useEffect(() => {
+    const onSubmit = async () => {
+      try {
+        const userType = localStorage.getItem("UserType");
+        const userId = JSON.parse(localStorage.getItem("User"));
+        const endpoint = userType === "company" ? `/companies/get_company/${userId}/` : `/investors/get_investor/${userId}/`;
+        const res = await axios.get(`http://127.0.0.1:8000${endpoint}`);
+
+        // console.log("API Response:", res);
+
+        const username = res.data.username;
+        const email = res.data.email;
+        localStorage.setItem("Name", username);
+        setName(username);
+        setEmail(email);
+      }
+      catch (error) {
+        console.error('Error:', error);
+      }
+    };
+    onSubmit();
+  }, []);
+
+
   return (
     <div className={styles.sidebarContainer}>
       <div className={styles.profile}>
         <div className={styles.avatar} />
         <div>
-          <div className={styles.name}>Parth Ajmera</div>
-          <div className={styles.email}>parth.ajmera@chaincred.com</div>
+          <div className={styles.name}>{name }</div>
+          <div className={styles.email}>{email }</div>
         </div>
       </div>
       <div className={styles.cardContainer}>
         <div className={`${styles.card} ${styles.glass}`}>
           <div className={styles.cardBackground}></div>
-          <div>Parth Ajmera</div>
+          <div>{name}</div>
           <div className={styles.cardDetails}>
             <div>Amazon Platinum</div>
             <div>1234 .... .... 5678</div>
